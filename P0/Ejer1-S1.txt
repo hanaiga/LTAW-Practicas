@@ -1,0 +1,40 @@
+!-- Ejercicio 1 --!
+
+<!DOCTYPE urjc_ML SYSTEM "urjc_ml.dtd">
+<urjc_ml>
+  <!-- include URL URJC -->
+  <campus>
+    <nombre>Campus de Fuenlabrada</nombre>
+    <escuela>
+      <nombre>ETSI Telecomunicación</nombre>
+      <grado>
+        <nombre>Ingeniería en Sistemas Audiovisuales y Multimedia </nombre>
+        <asignatura>Laboratorio de Tecnologias Audiovisuales en la Web</asignatura>
+        <asignatura>Construcción de servicios y Aplicaciones Audiovisuales en Internet</asignatura>
+      </grado>
+    </escuela>
+  </campus>
+</urjc_ml>
+
+
+
+
+a) Explica para qué sirve la primera línea del documento y por qué es necesaria.
+    La primera linea lo que hace es definir el tipo de marcado que se va a usar.
+b) Si se omitiese esta línea, ¿Qué piensas que ocurriría?
+    Si se omite esta linea el compliador no sabe que lenguaje de marcado tiene que suar y por lo tanto
+    no funcionaria. 
+c) Sin conocer el contenido del fichero urjc_ml.dtd, ¿el documento es sintácticamente correcto?
+    Sí, el documento es correcto aparentemente pero no sabemos si es valido o no, porque tendriamos 
+    que conocer si las etiquetas usadas son correctas. 
+d) ¿Qué hace la tercera línea?
+    Se trata de un comentario.
+e) ¿Cuantas etiquetas de apertura hay? ¿Cuantas de cierre?
+    9 de apertura y 9 de cierre
+f) Dibuja el diagrama de contenedores de este documento.
+g) Dibuja la estructura en árbol que define este documento.
+
+
+
+
+
