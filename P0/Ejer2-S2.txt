@@ -1,0 +1,24 @@
+!-- Ejercicio 2 --!
+
+<!DOCTYPE urjc_ML SYSTEM "universidad.dtd">
+<universidad>
+    <escuela>
+    <nombre>ETSI Telecomunicación</nombre>
+    <grado>
+        <nombre>Ingeniería en Sistemas Audiovisuales y Multimedia</nombre>
+            <asignatura>LTAW</asignatura>
+            <asignatura>CSAII</asignatura>
+            <asignatura>ASA II</asignatura>
+    </grado>
+    <grado>
+        <nombre>Ingeniería en Robótica y Software</nombre>
+            <asignatura>AC</asignatura>
+    </grado>
+    </escuela>
+</universidad>
+
+
+
+b) hay 11 contenedores: todos aquellos que no sean texto.
+c) elementos no terminales son 4aquellos de los cuales no cuelga nada y son los textos del final. 
+d) en el nivel 3 hay 7 elementos, es decir, todo aquello que esta debajo de grado. 
