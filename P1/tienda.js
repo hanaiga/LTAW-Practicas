@@ -4,7 +4,7 @@ const fs = require('fs');
 const PUERTO = 9090;
 
 //-- Fichero HTML de la página principal
-
+// Hay que cambiar esto ojoooooooooo%%%%%%%%%%%%%%%%%%%%%%
 const pagina_main = fs.readFileSync('error.html');
 
 //-- Fichero HTML de la página de error
