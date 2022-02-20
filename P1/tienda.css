@@ -5,6 +5,7 @@ body{
 
 #portada{
     padding-top: 30px;
+    padding-bottom: 20px;
 }
 
 img {
@@ -27,17 +28,25 @@ img {
 #lujo{
     border: 3px solid #ddd;
     border-radius: 4px;
-    background-color: rgba(238, 238, 238, 0.685);
+    background-color: rgba(238, 238, 238, 0.527);
     padding: 8px;
     display:flex;
     align-items: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: 200px;
     margin-right: 200px;
-
 }
 
 h1{
-    color: pink;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font: small-caps 100%/200% serif;
+    font-size: 200%;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(182, 12, 140, 0.589);
+    margin-left: 220px;
+    margin-right: 220px;
+    
 }
