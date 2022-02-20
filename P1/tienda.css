@@ -1,28 +1,40 @@
 
+body{
+    background-image: url(fondo.jpg);
+}
+
+#portada{
+    padding-top: 30px;
+}
+
 img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 30%;
 
 }
 
 #product{
     border: 2px solid #ddd;
     border-radius: 4px;
-    padding: 10px;
-    width: 150px;
+    padding: 8px;
+    width: 200px;
+    background-color: rgb(255, 255, 255);
 
 }
 
 #lujo{
     border: 3px solid #ddd;
     border-radius: 4px;
-    padding: 15px;
-    
- 
-        display:flex;
-        align-items: center;
+    background-color: rgba(238, 238, 238, 0.685);
+    padding: 8px;
+    display:flex;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 200px;
+    margin-right: 200px;
 
 }
 
