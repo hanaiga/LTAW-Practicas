@@ -1,15 +1,19 @@
-const http = require('http');
+//-- Ejemplo 7. MODULO HTTP
+//-- Servidor que devuelve una página en HTML cuando se le pide
+//-- el recurso raiz (/), y devuelve una página de ERROR también
+//-- en HTML cuando se pide cualquier otro recurso
+//-- Importar el módulo FS
 const fs = require('fs');
+const http = require('http');
 
 const PUERTO = 9090;
 
-//-- Fichero HTML de la página principal
-// Hay que cambiar esto ojoooooooooo%%%%%%%%%%%%%%%%%%%%%%
-const pagina_main = fs.readFileSync('error.html');
+//-- Texto HTML de la página principal
+const pagina_main = fs.readFileSync('tienda.html');
 
-//-- Fichero HTML de la página de error
+//-- Texto HTML de la página de error
+
 const pagina_error = fs.readFileSync('error.html');
-
 
 const server = http.createServer((req, res)=>{
     console.log("Petición recibida!");
@@ -36,7 +40,7 @@ const server = http.createServer((req, res)=>{
     //-- code, code_msg y page
     res.statusCode = code;
     res.statusMessage = code_msg;
-    res.setHeader('Content-Type','text/html');
+    res.setHeader('Content-Type');
     res.write(page);
     res.end();
 });
@@ -44,3 +48,4 @@ const server = http.createServer((req, res)=>{
 server.listen(PUERTO);
 
 console.log("Ejemplo 7. Escuchando en puerto: " + PUERTO);
+
