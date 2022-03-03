@@ -38,7 +38,12 @@ img {
     margin-left: 220px;
     margin-right: 220px;
 }
-
+#config {
+    display: flex;
+    width: 500px;
+    height: 160px;
+}
+  
 h1{
     color: rgb(0, 0, 0);
     text-align: center;
@@ -51,10 +56,13 @@ h1{
     margin-right: 240px;
     
 }
- 
-#config {
-    display: flex;
-    width: 500px;
-    height: 160px;
+
+.Info{
+    text-align: center;
+    font: small-caps 100%/200% serif;
+    font-size: 130%;
 }
-  
+
+#Contact{
+    width: 40px;
+}
