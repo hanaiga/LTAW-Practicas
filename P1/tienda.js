@@ -17,7 +17,7 @@ const server = http.createServer((req, res)=>{
 
     //-- Analizar el recurso y obtengo la URL del mensaje de solicitud
     //-- Construir el objeto url con la url de la solicitud
-    const url = new URL(req.url, 'http://' + req.headers['host']);
+    let url = new URL(req.url, 'http://' + req.headers['host']);
     console.log(" URL solicitada: " + url.href)
     console.log(url.pathname)
 
@@ -27,7 +27,7 @@ const server = http.createServer((req, res)=>{
     //-- Analizo la solicitud
     //-- Si es el recurso raiz devuelvo la pag principal de la tienda
     if (url.pathname == '/') {
-        recurso += "/tienda.html"
+        recurso += "tienda.html"
     }else{ //-- otro, me quedo con su recurso
         recurso += url.pathname
     }
@@ -58,7 +58,7 @@ const server = http.createServer((req, res)=>{
             //-- La cabecera 404 de error
             res.writeHead(404, {'Content-Type': 'text/html'})
             console.log("404 Not Found")
-            data = fs.readFileSync(pagina_error)
+            data = pagina_error
 
         //-- Ningun error, cabecera de 200 ok     
         }else{
