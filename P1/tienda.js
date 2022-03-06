@@ -75,4 +75,4 @@ const server = http.createServer(function(req, res) {
 //-- Activo el servidor:
 server.listen(PUERTO);
 
-console.log("Server tienda activado!. Escuchando en puerto: " + PUERTO);
+console.log("Escuchando en puerto: " + PUERTO);
