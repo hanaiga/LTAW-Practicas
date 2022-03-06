@@ -1,51 +1,79 @@
-//-- Ejemplo 7. MODULO HTTP
-//-- Servidor que devuelve una página en HTML cuando se le pide
-//-- el recurso raiz (/), y devuelve una página de ERROR también
-//-- en HTML cuando se pide cualquier otro recurso
+//-- Servidor tienda
 //-- Importar el módulo FS
 const fs = require('fs');
 const http = require('http');
 
+//-- Puerto donde escuha el servidor
 const PUERTO = 9090;
 
-//-- Texto HTML de la página principal
-const pagina_main = fs.readFileSync('tienda.html');
-
 //-- Texto HTML de la página de error
-
 const pagina_error = fs.readFileSync('error.html');
 
+//-- Creo el servidor y establezco la retrollamada
 const server = http.createServer((req, res)=>{
+
+    //-- Recibida una peticion
     console.log("Petición recibida!");
 
-    //-- Valores de la respuesta por defecto
-    let code = 200;
-    let code_msg = "OK";
-    let page = pagina_main;
-
-    //-- Analizar el recurso
+    //-- Analizar el recurso y obtengo la URL del mensaje de solicitud
     //-- Construir el objeto url con la url de la solicitud
     const url = new URL(req.url, 'http://' + req.headers['host']);
-    console.log(url.pathname);
+    console.log(" URL solicitada: " + url.href)
+    console.log(url.pathname)
 
-    //-- Cualquier recurso que no sea la página principal
-    //-- genera un error
-    if (url.pathname != '/') {
-        code = 404;
-        code_msg = "Not Found";
-        page = pagina_error;
+    //-- Aqui almaceno el recurso pedido
+    let recurso = ""
+
+    //-- Analizo la solicitud
+    //-- Si es el recurso raiz devuelvo la pag principal de la tienda
+    if (url.pathname == '/') {
+        recurso += "/tienda.html"
+    }else{ //-- otro, me quedo con su recurso
+        recurso += url.pathname
     }
 
-    //-- Generar la respusta en función de las variables
-    //-- code, code_msg y page
-    res.statusCode = code;
-    res.statusMessage = code_msg;
-    res.setHeader('Content-Type');
-    res.write(page);
-    res.end();
-});
+    //-- la extension del recurso
+    extension = recurso.split(".")[1]
+
+    //-- Defino los tipos de mime
+    const type_mime = {
+        "html" : "text/html",
+        "css"  : "text/css",
+        "jpg"  : "image/jpg",
+        "JPG"  : "image/jpg",
+        "jpeg" : "image/jpeg",
+        "png"  : "image/png",
+        "gif"  : "image/gif",
+        "ico"  : "image/x-icon"
+    }
+
+    //-- Defino el tipo de mime del recurso
+    let mime = type_mime[extension]
+
+    //-- Leo el fichero
+    fs.readFile(recurso, function(err, data){
+
+        //-- Si se produce error, muestro la pag de error
+        if (err){
+            //-- La cabecera 404 de error
+            res.writeHead(404, {'Content-Type': 'text/html'})
+            console.log("404 Not Found")
+            data = fs.readFileSync(pagina_error)
+
+        //-- Ningun error, cabecera de 200 ok     
+        }else{
+            res.writeHead(200, {'Content-Type': mime})
+            console.log("200 OK")
+        }
+
+        //-- Envio el recurso solicitado 
+        res.write(data)
+        res.end()
+
+    })
+})
 
 server.listen(PUERTO);
 
-console.log("Ejemplo 7. Escuchando en puerto: " + PUERTO);
+console.log("Escuchando en puerto: " + PUERTO);
 
