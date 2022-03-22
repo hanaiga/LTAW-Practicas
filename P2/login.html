@@ -8,11 +8,21 @@
     <link rel="stylesheet" href="tienda.css">
 </head>
 <body>
-    <div>
-        <a href="archivos-p2/cosooooo"><img src="archivos-p.jpg" alt="portada" width="150" id = "product"></a>
-    </div>
+
     <div id="portada"> 
         <img src="portada_tienda.png" alt="portada" width="950">
+    </div>
+
+    <div id="formulario">
+        <form action="/procesar" method="get">
+            Nombre:
+            <input type="text" name="nombre"/>
+            <p></p>
+            Apellidos:
+            <input type="text" name="apellidos" />
+            <p></p>
+              <input type="submit" value="Enviar"/>
+        </form>
     </div>
     <footer class="Info">
         <p class="footer-links">
