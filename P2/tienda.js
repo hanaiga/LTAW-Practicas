@@ -7,6 +7,28 @@ const http = require('http');
 //-- Puerto del servidor 
 const PUERTO = 9090; 
 
+//-- LA base de datos -> tienda.json
+const BASE_DATOS = fs.readFileSync('tienda.json')
+
+//-- Obtenemos la estructura de la base de datos
+ const tienda = JSON.parse(BASE_DATOS)
+
+const FORMULARIO = fs.readFileSync('login.html', 'utf-8')
+
+//-- creamos arrays para almacenar nombres de usuarios y contraseñas
+let nombres = []
+let contraseñas = []
+
+//-- Recorro la base de datos y agrego los usuarios
+let usuarios = tienda[1]["usuarios"]
+for (i = 0; i < usuarios.lenght; i++){
+  nombres.push(usuarios_reg[i]["usuario"])
+  contraseñas.push(usuarios[i]["password"])
+}
+
+
+
+
 //-- Creamos el servidor
 const server = http.createServer(function(req, res) {
     
