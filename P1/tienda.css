@@ -66,3 +66,14 @@ h1{
 #Contact{
     width: 40px;
 }
+
+#pag_principal{
+    text-align: left;
+    font: small-caps 100%/200% serif;
+    font-size: 160%;
+    margin-left: 50px;
+    margin-right: 1200px;
+}
+#enlace{
+    color: rgba(182, 12, 140, 0.589);
+}
