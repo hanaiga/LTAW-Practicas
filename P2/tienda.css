@@ -78,3 +78,17 @@ h1{
 #enlace{
     color: rgba(182, 12, 140, 0.589);
 }
+
+#log{
+    width: 55px;
+    align-items: right;
+    margin-right: 20px;
+}
+#carro{
+    width: 50px;
+    align-items: right;
+}
+#login{
+    display: flex;
+    margin: 30px;
+}
