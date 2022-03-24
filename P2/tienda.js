@@ -25,16 +25,15 @@ const ERROR = fs.readFileSync('login-res-error.html', 'utf-8')
 let nombres = []
 let contraseñas = []
 
-//-- inicializo la variable que va a tener el contenido a entregar
-let contenido
+//-- inicializo la variable que va a tener el content a entregar
+let content
 
 //-- Recorro la base de datos y agrego los usuarios
-let usuarios = tienda[0]["usuarios"]
-for (i = 0; i < usuarios.lenght; i++){
-  nombres.push(usuarios[i]["usuario"])
-  contraseñas.push(usuarios[i]["password"])
-}
-
+tienda[1]["usuarios"].forEach((element, index)=>{
+  console.log("Usuario " + (index + 1) + ": " + element.usuario);
+  nombres.push(element.usuario);
+});
+console.log(nombres)
 
 //-- Creamos el servidor
 const server = http.createServer(function(req, res) {
@@ -42,9 +41,9 @@ const server = http.createServer(function(req, res) {
   //-- Hemos recibido una solicitud
   console.log("Petición recibida!");
 
-  //-- Obtenemos la URL del recurso
+  //-- Obtenemos la URL del content
   let url = new URL(req.url, 'http://' + req.headers['host']);
-  console.log("La URL del recurso solicitado es: " + url.href)
+  console.log("La URL del content solicitado es: " + url.href)
   console.log("");
   console.log("Método: " + req.method);
   console.log("Recurso: " + req.url);
@@ -57,14 +56,13 @@ const server = http.createServer(function(req, res) {
   let contra = url.searchParams.get('password')
   console.log("La contraseña es: " + contra)
 
-    //-- Aqui almaceno el recurso solicitado
-  let recurso = "";
+    //-- Aqui almaceno el content solicitado
+  let content = "";
 
   //-- Analizo
-  //-- si es el recurso raiz devuelvo la pag principal
+  //-- si es el content raiz devuelvo la pag principal
   if(url.pathname == '/') { 
-    recurso += "/tienda.html" 
-    contenido = recurso
+    content += "/tienda.html" 
   } else if (url.pathname == '/login'){
     //comprobar si hay cookie
     // ahora suponiendo que no hay mandamos formulario para que lo rellene
@@ -75,29 +73,29 @@ const server = http.createServer(function(req, res) {
 
   //-- Nos devuelve el formulario relleno miramos si esta registrado en la base de datos
   }else if (url.pathname == '/procesar') {
-    if (usuarios.includes(nombre) && contraseñas.includes(contra)) {
+    if (nombres.includes(nombre) ) {
       console.log("usuario: " + nombre)
 
       // aqui tengo que dar la cooke linea 248
 
       console.log("usuario registrado, todo ok")
-      contenido = RESPUESTA
+      content = RESPUESTA
       html_user = nombre
       // devuelvo este mensaje en html para el cliente
-      contenido = contenido.replace("USER",html_user )
+      content = content.replace("USER",html_user )
     }else{
-      contenido = ERROR
+      content = ERROR
     }
   } else { 
-    recurso = url.pathname;
+    content = url.pathname;
   }
   
-  //-- obtengo la extension del recurso
-  extension = recurso.split(".")[1]; 
-  recurso = "." + recurso 
+  //-- obtengo la extension del content
+  extension = content.split(".")[1]; 
+  content = "." + content 
 
-  console.log("Recurso solicitado: " + recurso);
-  console.log("Extension del recurso: " + extension);
+  console.log("Recurso solicitado: " + content);
+  console.log("Extension del content: " + extension);
 
   //-- Defino tipos de mime
   const type_mime = {
@@ -110,18 +108,18 @@ const server = http.createServer(function(req, res) {
     "ico" : "image/ico",
   }; 
 
-  //-- Defino tipo de mime del recurso solicitado
+  //-- Defino tipo de mime del content solicitado
   let mime = type_mime[extension];
 
-  fs.readFile(recurso, function(err,data) {
+  fs.readFile(content, function(err,data) {
     //-- Si se produce error muestro pag de error
     if(err) {
 
         //-- Mandamos cabecera de error
       res.writeHead(404, {'Content-Type': 'text/html'});
       console.log("404 Not Found");
-      recurso = "error.html";
-      data = fs.readFileSync(recurso);
+      content = "error.html";
+      data = fs.readFileSync(content);
        
     }else { 
         //-- Mandamos cabecera de ok
@@ -129,7 +127,7 @@ const server = http.createServer(function(req, res) {
       console.log("200 OK")
     }
     
-    // Enviamos el recurso solicitado
+    // Enviamos el content solicitado
     res.write(data);
     res.end();
   });

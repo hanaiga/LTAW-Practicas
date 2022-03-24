@@ -1,17 +1,24 @@
 [
+
+
+    {
+        "productos": [
+            {
+                "nombre": "lancome"
+            }
+        ]
+    },
     {
         "usuarios": [
             {
                 "usuario": "Hannah",
                 "nombre": "Hannah Montana",
-                "email": "prueba@gmail.com",
-                "password": "1234"
+                "email": "prueba@gmail.com"
             },
             {
                 "usuario": "root",
                 "nombre": "Usuario Raiz",
-                "email": "prueba@gmail.com",
-                "password": "1234"
+                "email": "prueba@gmail.com"
             }
 
         ]
