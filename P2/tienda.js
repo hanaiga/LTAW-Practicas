@@ -66,11 +66,8 @@ const server = http.createServer(function(req, res) {
   } else if (url.pathname == '/login'){
     //comprobar si hay cookie
     // ahora suponiendo que no hay mandamos formulario para que lo rellene
-    content = FORMULARIO
+    content += "/login.html"
     
-    // la extension es html
-    ext = "html"
-
   //-- Nos devuelve el formulario relleno miramos si esta registrado en la base de datos
   }else if (url.pathname == '/procesar') {
     if (nombres.includes(nombre) ) {
@@ -79,12 +76,13 @@ const server = http.createServer(function(req, res) {
       // aqui tengo que dar la cooke linea 248
 
       console.log("usuario registrado, todo ok")
-      content = RESPUESTA
+      content = "/login-res.html"
       html_user = nombre
+      console.log("CAAAAAAAAAAAAAAAAAAAAAAa" + html_user)
       // devuelvo este mensaje en html para el cliente
-      content = content.replace("USER",html_user )
+      content = content.replace("HTML_EXTRA", html_user )
     }else{
-      content = ERROR
+      content += "/login-res-error.html" 
     }
   } else { 
     content = url.pathname;
