@@ -66,7 +66,7 @@ const server = http.createServer(function(req, res) {
   } else if (url.pathname == '/login'){
     //comprobar si hay cookie
     // ahora suponiendo que no hay mandamos formulario para que lo rellene
-    contentido = FORMULARIO
+    content = FORMULARIO
     
     // la extension es html
     ext = "html"
