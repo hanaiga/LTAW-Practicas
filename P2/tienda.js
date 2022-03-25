@@ -7,6 +7,12 @@ const http = require('http');
 //-- Puerto del servidor 
 const PUERTO = 9090; 
 
+//-- pag principal
+const MAIN = fs.readFileSync('tienda.html', 'utf-8')
+
+//-- pag de error general
+const MAINERROR = fs.readFileSync('error.html', 'utf-8')
+
 //-- LA base de datos -> tienda.json
 const BASE_DATOS = fs.readFileSync("tienda.json")
 
@@ -26,7 +32,6 @@ let nombres = []
 let contraseñas = []
 
 //-- inicializo la variable que va a tener el content a entregar
-let content
 
 //-- Recorro la base de datos y agrego los usuarios
 tienda[1]["usuarios"].forEach((element, index)=>{
@@ -34,6 +39,18 @@ tienda[1]["usuarios"].forEach((element, index)=>{
   nombres.push(element.usuario);
 });
 console.log(nombres)
+
+  //-- Defino tipos de mime
+  const type_mime = {
+    "html" : "text/html",
+    "css" : "text/css",
+    "jpeg" : "image/jpeg",
+    "jpg" : "image/jpg",
+    "png" : "image/png",
+    "gif" : "image/gif",
+    "ico" : "image/ico",
+  }; 
+
 
 //-- Creamos el servidor
 const server = http.createServer(function(req, res) {
@@ -56,6 +73,7 @@ const server = http.createServer(function(req, res) {
   let contra = url.searchParams.get('password')
   console.log("La contraseña es: " + contra)
 
+// recurso es mi url.patchname y su solicitud es mi content
     //-- Aqui almaceno el content solicitado
   let content = "";
 
@@ -63,48 +81,36 @@ const server = http.createServer(function(req, res) {
   //-- si es el content raiz devuelvo la pag principal
   if(url.pathname == '/') { 
     content += "/tienda.html" 
-  } else if (url.pathname == '/login'){
-    //comprobar si hay cookie
-    // ahora suponiendo que no hay mandamos formulario para que lo rellene
-    content += "/login.html"
-    
-  //-- Nos devuelve el formulario relleno miramos si esta registrado en la base de datos
-  }else if (url.pathname == '/procesar') {
+  } else if (url.pathname == '/procesar') {
     if (nombres.includes(nombre) ) {
       console.log("usuario: " + nombre)
 
       // aqui tengo que dar la cooke linea 248
 
       console.log("usuario registrado, todo ok")
-      content = "/login-res.html"
+      
       html_user = nombre
+      content = "/login-res.html"
       console.log("CAAAAAAAAAAAAAAAAAAAAAAa" + html_user)
       // devuelvo este mensaje en html para el cliente
-      content = content.replace("HTML_EXTRA", html_user )
+      content = content.replace("USER", html_user )
     }else{
       content += "/login-res-error.html" 
     }
   } else { 
     content = url.pathname;
   }
+ 
   
   //-- obtengo la extension del content
   extension = content.split(".")[1]; 
   content = "." + content 
 
+ 
+
   console.log("Recurso solicitado: " + content);
   console.log("Extension del content: " + extension);
 
-  //-- Defino tipos de mime
-  const type_mime = {
-    "html" : "text/html",
-    "css" : "text/css",
-    "jpeg" : "image/jpeg",
-    "jpg" : "image/jpg",
-    "png" : "image/png",
-    "gif" : "image/gif",
-    "ico" : "image/ico",
-  }; 
 
   //-- Defino tipo de mime del content solicitado
   let mime = type_mime[extension];
