@@ -37,8 +37,10 @@ let contraseñas = []
 tienda[1]["usuarios"].forEach((element, index)=>{
   console.log("Usuario " + (index + 1) + ": " + element.usuario);
   nombres.push(element.usuario);
+  contraseñas.push(element.password)
 });
 console.log(nombres)
+console.log(contraseñas)
 
   //-- Defino tipos de mime
   const type_mime = {
@@ -82,7 +84,7 @@ const server = http.createServer(function(req, res) {
   if(url.pathname == '/') { 
     content += "/tienda.html" 
   } else if (url.pathname == '/procesar') {
-    if (nombres.includes(nombre) ) {
+    if (nombres.includes(nombre) && contraseñas.includes(contra)) {
       console.log("usuario: " + nombre)
 
       // aqui tengo que dar la cooke linea 248

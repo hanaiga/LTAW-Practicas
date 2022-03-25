@@ -13,12 +13,14 @@
             {
                 "usuario": "Hannah",
                 "nombre": "Hannah Montana",
-                "email": "prueba@gmail.com"
+                "email": "prueba@gmail.com",
+                "password": "1234"
             },
             {
                 "usuario": "root",
                 "nombre": "Usuario Raiz",
-                "email": "prueba@gmail.com"
+                "email": "prueba@gmail.com",
+                "password": "1234"
             }
 
         ]
