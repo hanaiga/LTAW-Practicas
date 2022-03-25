@@ -79,10 +79,11 @@ const server = http.createServer(function(req, res) {
     //-- Aqui almaceno el content solicitado
   let content = "";
 
+    let html_extra = ""
   //-- Analizo
   //-- si es el content raiz devuelvo la pag principal
   if(url.pathname == '/') { 
-    content += "/tienda.html" 
+    content += "/tienda.html"
   } else if (url.pathname == '/procesar') {
     if (nombres.includes(nombre) && contraseñas.includes(contra)) {
       console.log("usuario: " + nombre)
@@ -93,9 +94,9 @@ const server = http.createServer(function(req, res) {
       
       html_user = nombre
       content = "/login-res.html"
-      console.log("CAAAAAAAAAAAAAAAAAAAAAAa" + html_user)
       // devuelvo este mensaje en html para el cliente
-      content = content.replace("USER", html_user )
+      content = content.replace("HTML_EXTRA", html_user )
+      
     }else{
       content += "/login-res-error.html" 
     }
@@ -103,16 +104,12 @@ const server = http.createServer(function(req, res) {
     content = url.pathname;
   }
  
-  
   //-- obtengo la extension del content
   extension = content.split(".")[1]; 
   content = "." + content 
 
- 
-
   console.log("Recurso solicitado: " + content);
   console.log("Extension del content: " + extension);
-
 
   //-- Defino tipo de mime del content solicitado
   let mime = type_mime[extension];
