@@ -4,9 +4,75 @@
     {
         "productos": [
             {
-                "Nombre": "Lancome",
+                "Nombre": "LANCOME",
                 "Descripcion": " Elige tu propio camino hacia la felicidad con el perfume de Lancôme La Vie Est Belle, toda unan declaración de felicidad y libertad. Para mujeres seguras de sí mismas que rechazan los rígidos dictados de la sociedad y eligen su propio camino. Para una mujer Libre, Feliz y Realizada. Una felicidad que se ve reflejada en el frasco con una “sonrisa de cristal” por su forma que evoca la curva de una sonrisa inscrita en el corazón del frasco de cristal cuadrado.Su jugo, encapsulada en el aroma de un perfume dulce que crearon tres de los perfumistas más importantes de Francia: Olivier Polge, Dominique Ropio y Anne Flipo. La Vie Est Belle es una fragancia floral que irradia felicidad.El Iris apetitoso, el Praliné y flores blancas junto con otros 63 ingredientes, hace el existo de la fragancia de la felicidad ",
                 "Precio": "74,98€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "YVES SAINT LAURENT",
+                "Descripcion": " Libre Eau de Parfum de Yves Saint Laurent es el perfume de mujer que te invita a sentir la libertad a través de una aroma floral único.Yves Saint Laurent reinventa el perfume floral combinando dos notas olfativas totalmente antagónicas, la Flor de naranjo marroqui y la esencia de Lavanda francesa. Creando un jugo lleno de matices con acordes frescos y aromáticos para desvelar toda la elegancia y feminidad de la mujer Yves Saint Laurent.Inspirado en la característica dualidad entre la herencia y modernidad de la marca, transgresión, provocación...valores que han estado presentes desde el nacimiento de la marca hasta el día hoy.Para mujeres que quieren sentirse más bellas y fuertes, apasionadas y seguras de sí mismas.Un  frasco de alta costura que es un auténtico objeto de deseo con su logo Cassandra incrustado en el cristal. Las cadenas doradas que rodean el cuello de la botella son un homenaje a  las cadenas de los bolsos icónicos de Yves Saint Laurent y su tapón irregular lacado en negro inspirado en la asimetría de los vestidos de Vacarello.",
+                "Precio": "89,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "JIMMY CHOO",
+                "Descripcion": "Conviértete en la protagonista de la alfombra roja con el nuevo perfume de JIMMY CHOO - I WANT CHOO. El accesorio imprescindible con el que serás el centro de todas las miradas.Un perfume floral oriental, con unas notas de salida frutales con la mandarina y el melocotón, un corazón floral con lirio y jazmín, acabando con un fondo de vainilla y benzoin.¡Voilà!, con JIMMY CHOO estás lista para comerte el mundo.",
+                "Precio": "59,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "TOUS",
+                "Descripcion": "Es un Eau de Parfum polifacético que se mueve entre la ternura y lo dinámico, entre la suavidad y lo intenso… Un aroma que, además de ser un icono, es una joya y representa a la mujer contemporánea.",
+                "Precio": "44,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "CHLOE",
+                "Descripcion": "Chloe Love Story es una contemporánea historia de seducción. Dirigida a mujeres de espíritu libre y poseedora de una moderna y sencilla sensualidad. Floral con un toque afrutado, fresca, sensual, radiante, luminosa y alegre.",
+                "Precio": "49,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "MARC JACOBS",
+                "Descripcion": "Una expresión fragante de autenticidad que es una declaración de amor suntuosa y dorada al verdadero yo. Una espléndida e intensa interpretación de la Eau de Toilette, Perfect Intense Marc Jacobs es una fragancia floral para mujer entretejida con notas de nuez en un perfume de diseñador con un textura y personalidad. Esta Eau de Parfum para mujer floral reconfortante es una declaración olfativa empoderada y audaz,y una celebración de las diferencias nos hacen hermosas tal como somos – como dice el mismo Marc Jacobs, #PerfectAsIAm. Este perfume intenso y duradero marca el tono de entrada con cremoso jazmín nocturno que libera un dulzor suave y se mezcla deliciosamente con el narciso en un misterioso aroma solar.",
+                "Precio": "74,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "PACO RABENNE",
+                "Descripcion": "Fragancia para hombres, el exceso en su estado más puro. Compuesta por un explosivo cóctel de esencias: Fuego y fresco, Oriental indomable, Jengibre sumamente apetitoso, Vainilla ardiente.",
+                "Precio": "59,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "DIOR",
+                "Descripcion": "El frescor potente del Perfume de Dior Sauvage, exhala nuevas facetas sensuales y misteriosas, renovando ampliamente la firma con una composición virtuosa. La Bergamota de Calabria, siempre tan chispeante y jugosa, incorpora nuevas notas especiadas, aportándole profundidad y sensualidad. Por su parte, la estela amaderada y ambarina del Ambroxan® se envuelve en un absoluto de Vainilla de Papúa Nueva Guinea, con acentos ahumados que aportan masculinidad. François Demachy, Perfumista-Creador Dior, se inspiró en el desierto a la hora mágica del atardecer. El frescor de la noche junto con el ardiente aire del desierto exhala aromas intensos. En esa hora en la que los lobos aparecen y el cielo se enciende, se despliega una nueva magia.",
+                "Precio": "84,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "HUGO BOSS",
+                "Descripcion": "El hombre Boss está preparado para tener éxito: competitivo, emprendedor y ambicioso. Sus rituales diarios de preparación forman parte de su búsqueda personal de éxito y Boss Bottled Eau de Toilette se ha convertido en una parte de ello. Confiado y contemporáneo: las líneas limpias hacen del Boss Bottled un clásico icónico y la encapsulación del Boss en una fragancia. Combinando elegancia y estilo, fue diseñado pensando en el hombre moderno. Vibrante con notas frescas y sensuales, la fragancia emana distinción, sofisticación y alegría de vivir. Equilibrado con una nota de salida fresca y afrutada, el corazón cálido, especiado y floral está dominado por geranios y sazonado con un toque de clavo de olor. La nota de fondo es decididamente masculina, una armonía vibrante de sándalo, cedro y vetiver. Agita tus opciones diarias con este clásico atemporal. ",
+                "Precio": "74,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "CAROLINA HERRERA",
+                "Descripcion": "Bad Boy es una expresión aromática de la dualidad, que representa la naturaleza audaz del hombre moderno, aquellos que trazan su propio camino y diseñan sus propios principios. Es fuerte y sensible, a la vez que confiado y relajado. Bad Boy Eau de Toilette es un viaje sensorial, una combinación entre sofisticación y modernidad.  Bad Boy se abre con notas seductoras de pimienta negra, pimienta blanca y bergamota. En el corazón de la fragancia, la madera de cedro y la salvia aportan una elegancia magnética pero el verdadero secreto se encuentra en la base del aroma, con la sensual combinación entre el haba tonka y el cacao. El frasco en forma de rayo es atrevido, distintivo y llamativo, simbolizando la fuerza heroica.",
+                "Precio": "74,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "BEVERLY HILLS",
+                "Descripcion": "Una expresión fragante de autenticidad que es una declaración de amor suntuosa y dorada al verdadero yo. Una espléndida e intensa interpretación de la Eau de Toilette, Perfect Intense Marc Jacobs es una fragancia floral para mujer entretejida con notas de nuez en un perfume de diseñador con un textura y personalidad. Esta Eau de Parfum para mujer floral reconfortante es una declaración olfativa empoderada y audaz,y una celebración de las diferencias nos hacen hermosas tal como somos – como dice el mismo Marc Jacobs, #PerfectAsIAm. Este perfume intenso y duradero marca el tono de entrada con cremoso jazmín nocturno que libera un dulzor suave y se mezcla deliciosamente con el narciso en un misterioso aroma solar.",
+                "Precio": "59,95€",
+                "Stock": "5"
+            },
+            {
+                "Nombre": "RALPH LAUREN",
+                "Descripcion": "Demuéstrate a ti mismo y a los que te rodean que tu energía es casi inagotable. No te detengas, traspasa tus límites, supera todos los desafíos. El eau de toilette para hombre Ralph Lauren Polo Sport te seguirá siempre el ritmo. Notas de salida: lavanda, mandarina, menta, neroli, bergamota y limón. Notas de corazón: ciclamen, jengibre, hierba marina, jazmín y geranio. Notas de fondo: sándalo, ámbar, almizcle, madera de gaiac y cedro.",
+                "Precio": "19,95€",
                 "Stock": "5"
             }
         ]
