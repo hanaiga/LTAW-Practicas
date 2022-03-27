@@ -136,8 +136,119 @@ const server = http.createServer(function(req, res) {
       if (content  == "./login-res.html"){
         file = fs.readFileSync('login-res.html', 'utf-8')
         data = file.replace("HTML_EXTRA", html_user )
-      } else if (content == "./m1.html"){
-        
+      } else if (content == "./m1.html"){  
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m1.html"){  
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m2.html"){  
+        file = fs.readFileSync('m2.html', 'utf-8')
+        description = productos[1]["Descripcion"]
+        precio = productos[1]["Precio"]
+        stock = productos[1]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m3.html"){  
+        file = fs.readFileSync('m3.html', 'utf-8')
+        description = productos[2]["Descripcion"]
+        precio = productos[2]["Precio"]
+        stock = productos[2]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m4.html"){  
+        file = fs.readFileSync('m4.html', 'utf-8')
+        description = productos[3]["Descripcion"]
+        precio = productos[3]["Precio"]
+        stock = productos[3]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m5.html"){  
+        file = fs.readFileSync('m5.html', 'utf-8')
+        description = productos[4]["Descripcion"]
+        precio = productos[4]["Precio"]
+        stock = productos[4]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m6.html"){  
+        file = fs.readFileSync('m6.html', 'utf-8')
+        description = productos[5]["Descripcion"]
+        precio = productos[5]["Precio"]
+        stock = productos[5]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+
+        //-- apartir de aqui productos de hombre
+      }else if (content == "./m1.html"){  
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m1.html"){  
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m1.html"){  
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m1.html"){  
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./m1.html"){  
         file = fs.readFileSync('m1.html', 'utf-8')
         description = productos[0]["Descripcion"]
         precio = productos[0]["Precio"]
