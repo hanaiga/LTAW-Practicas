@@ -208,51 +208,61 @@ const server = http.createServer(function(req, res) {
         data = data.replace("STOCK", stock)
 
         //-- apartir de aqui productos de hombre
-      }else if (content == "./m1.html"){  
-        file = fs.readFileSync('m1.html', 'utf-8')
-        description = productos[0]["Descripcion"]
-        precio = productos[0]["Precio"]
-        stock = productos[0]["Stock"]
+      }else if (content == "./h1.html"){  
+        file = fs.readFileSync('h1.html', 'utf-8')
+        description = productos[6]["Descripcion"]
+        precio = productos[6]["Precio"]
+        stock = productos[6]["Stock"]
 
         //-- Cambio los datos de la base en el producto
         data = file.replace("DESCRIPCION", description)
         data = data.replace("PRECIO", precio)
         data = data.replace("STOCK", stock)
-      }else if (content == "./m1.html"){  
-        file = fs.readFileSync('m1.html', 'utf-8')
-        description = productos[0]["Descripcion"]
-        precio = productos[0]["Precio"]
-        stock = productos[0]["Stock"]
+      }else if (content == "./h2.html"){  
+        file = fs.readFileSync('h2.html', 'utf-8')
+        description = productos[7]["Descripcion"]
+        precio = productos[7]["Precio"]
+        stock = productos[7]["Stock"]
 
         //-- Cambio los datos de la base en el producto
         data = file.replace("DESCRIPCION", description)
         data = data.replace("PRECIO", precio)
         data = data.replace("STOCK", stock)
-      }else if (content == "./m1.html"){  
-        file = fs.readFileSync('m1.html', 'utf-8')
-        description = productos[0]["Descripcion"]
-        precio = productos[0]["Precio"]
-        stock = productos[0]["Stock"]
+      }else if (content == "./h3.html"){  
+        file = fs.readFileSync('h3.html', 'utf-8')
+        description = productos[8]["Descripcion"]
+        precio = productos[8]["Precio"]
+        stock = productos[8]["Stock"]
 
         //-- Cambio los datos de la base en el producto
         data = file.replace("DESCRIPCION", description)
         data = data.replace("PRECIO", precio)
         data = data.replace("STOCK", stock)
-      }else if (content == "./m1.html"){  
-        file = fs.readFileSync('m1.html', 'utf-8')
-        description = productos[0]["Descripcion"]
-        precio = productos[0]["Precio"]
-        stock = productos[0]["Stock"]
+      }else if (content == "./h4.html"){  
+        file = fs.readFileSync('h4.html', 'utf-8')
+        description = productos[9]["Descripcion"]
+        precio = productos[9]["Precio"]
+        stock = productos[9]["Stock"]
 
         //-- Cambio los datos de la base en el producto
         data = file.replace("DESCRIPCION", description)
         data = data.replace("PRECIO", precio)
         data = data.replace("STOCK", stock)
-      }else if (content == "./m1.html"){  
-        file = fs.readFileSync('m1.html', 'utf-8')
-        description = productos[0]["Descripcion"]
-        precio = productos[0]["Precio"]
-        stock = productos[0]["Stock"]
+      }else if (content == "./h5.html"){  
+        file = fs.readFileSync('h5.html', 'utf-8')
+        description = productos[10]["Descripcion"]
+        precio = productos[10]["Precio"]
+        stock = productos[10]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }else if (content == "./h6.html"){  
+        file = fs.readFileSync('h6.html', 'utf-8')
+        description = productos[11]["Descripcion"]
+        precio = productos[11]["Precio"]
+        stock = productos[11]["Stock"]
 
         //-- Cambio los datos de la base en el producto
         data = file.replace("DESCRIPCION", description)
