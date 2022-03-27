@@ -133,9 +133,18 @@ const server = http.createServer(function(req, res) {
       let precio = ""
       let stock = ""
 
-      if (content  == "./login-res.html"){
+      //-- login
+      if (content == "./tienda.html"){
+        file = fs.readFileSync('tienda.html', 'utf-8')
+        //data = file.replace("<h3></h3>", '<h3> Usuario: ' + html_user + '</h3>')
+
+      }else if (content  == "./login-res.html"){
         file = fs.readFileSync('login-res.html', 'utf-8')
         data = file.replace("HTML_EXTRA", html_user )
+        file = fs.readFileSync('tienda.html', 'utf-8')
+        data = file.replace("<h3></h3>", '<h3> Usuario: ' + html_user + '</h3>')
+
+        //-- productos
       } else if (content == "./m1.html"){  
         file = fs.readFileSync('m1.html', 'utf-8')
         description = productos[0]["Descripcion"]
