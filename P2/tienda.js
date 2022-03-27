@@ -27,6 +27,8 @@ const RESPUESTA = fs.readFileSync('login-res.html', 'utf-8')
 // la devuelvo si el usuario rellena el form y no esta resgtrado
 const ERROR = fs.readFileSync('login-res-error.html', 'utf-8')
 
+// los productos de la tienda
+const productos = tienda[0].productos
 //-- creamos arrays para almacenar nombres de usuarios y contraseñas
 let nombres = []
 let contraseñas = []
@@ -79,7 +81,6 @@ const server = http.createServer(function(req, res) {
     //-- Aqui almaceno el content solicitado
   let content = "";
 
-    let html_extra = ""
   //-- Analizo
   //-- si es el content raiz devuelvo la pag principal
   if(url.pathname == '/') { 
@@ -92,10 +93,8 @@ const server = http.createServer(function(req, res) {
 
       console.log("usuario registrado, todo ok")
       
-      html_user = nombre
       content = "/login-res.html"
-      // devuelvo este mensaje en html para el cliente
-      content = content.replace("HTML_EXTRA", html_user )
+      html_user = nombre
       
     }else{
       content += "/login-res-error.html" 
@@ -128,6 +127,29 @@ const server = http.createServer(function(req, res) {
         //-- Mandamos cabecera de ok
       res.writeHead(200, {'Content-Type': mime});
       console.log("200 OK")
+
+      let file = ""
+      let description = ""
+      let precio = ""
+      let stock = ""
+
+      if (content  == "./login-res.html"){
+        file = fs.readFileSync('login-res.html', 'utf-8')
+        data = file.replace("HTML_EXTRA", html_user )
+      } else if (content == "./m1.html"){
+        
+        file = fs.readFileSync('m1.html', 'utf-8')
+        description = productos[0]["Descripcion"]
+        precio = productos[0]["Precio"]
+        stock = productos[0]["Stock"]
+
+        //-- Cambio los datos de la base en el producto
+        data = file.replace("DESCRIPCION", description)
+        data = data.replace("PRECIO", precio)
+        data = data.replace("STOCK", stock)
+      }
+
+
     }
     
     // Enviamos el content solicitado

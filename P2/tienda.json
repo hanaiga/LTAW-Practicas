@@ -4,7 +4,10 @@
     {
         "productos": [
             {
-                "nombre": "lancome"
+                "Nombre": "Lancome",
+                "Descripcion": " Elige tu propio camino hacia la felicidad con el perfume de Lancôme La Vie Est Belle, toda unan declaración de felicidad y libertad. Para mujeres seguras de sí mismas que rechazan los rígidos dictados de la sociedad y eligen su propio camino. Para una mujer Libre, Feliz y Realizada. Una felicidad que se ve reflejada en el frasco con una “sonrisa de cristal” por su forma que evoca la curva de una sonrisa inscrita en el corazón del frasco de cristal cuadrado.Su jugo, encapsulada en el aroma de un perfume dulce que crearon tres de los perfumistas más importantes de Francia: Olivier Polge, Dominique Ropio y Anne Flipo. La Vie Est Belle es una fragancia floral que irradia felicidad.El Iris apetitoso, el Praliné y flores blancas junto con otros 63 ingredientes, hace el existo de la fragancia de la felicidad ",
+                "Precio": "74,98€",
+                "Stock": "5"
             }
         ]
     },
