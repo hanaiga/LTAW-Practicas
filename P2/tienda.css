@@ -92,3 +92,16 @@ h1{
     display: flex;
     margin: 30px;
 }
+
+#boton{
+    border-radius: 8px;
+    color: blanco;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    display: flex;
+
+} 
