@@ -101,7 +101,23 @@ h1{
     font-size: 14px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
+    margin-bottom: 20px;
 
 } 
+h3{
+    font: small-caps 100% serif;
+    font-weight: 700;
+    font-size: 20px;
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#datos{
+    padding: 4px;
+    margin-top: 10px;
+    margin-left: 220px;
+    margin-right: 220px;
+    text-align: center;
+}
