@@ -74,6 +74,7 @@ h1{
     font-size: 160%;
     margin-left: 50px;
     margin-right: 1180px;
+    align-items: center;
 }
 #enlace{
     color: rgb(0, 0, 0);
