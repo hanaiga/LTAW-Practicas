@@ -122,3 +122,12 @@ p{
     margin-right: 220px;
     text-align: center;
 }
+#arriba{
+    display: flex;
+}
+#busq{
+    padding: 30px;
+    margin-left: 10px;
+    margin-right: 30px;
+    
+}
