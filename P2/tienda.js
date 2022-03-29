@@ -126,7 +126,18 @@ const server = http.createServer(function(req, res) {
 
        let result = []
 
-      // for (let prodc of )
+       for (let prodc of products_json){
+         prodU = prodc.toUpperCase()
+
+         if(prodU.startsWith(param1)){
+           result.push(prodc)
+         }
+       }
+       console.log(result)
+       busqueda = result;
+       content = JSON.stringify(result);
+  }else if(url.pathname == '/buscar'){
+    content = "/tienda.html"
 
   }else { 
     content = url.pathname;
