@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PerfumHada</title>
     <link rel="stylesheet" href="tienda.css">
+    <script src="cliente.js" defer></script>
 </head>
 <body>
     <div id="arriba">
@@ -15,9 +16,9 @@
             <a href="compra.html"><img src="archivos-p2/carrito.png" alt="login" width="20" id="carro"></a>  
         </div>
         <div id="busq"> 
-        <h3>Buscar <input type="text" id="caja"></h3>
-        
-        <p id="display1"></p>
+            <input type="text" placeholder="Buscar..." id="caja" autocomplete="on">
+            <a href="/buscar"><button class='button'>Buscar</button></a>
+            <p id="display1"></p>
         </div>
     </div>
     <div id="portada"> 

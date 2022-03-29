@@ -44,6 +44,18 @@ tienda[1]["usuarios"].forEach((element, index)=>{
 console.log(nombres)
 console.log(contraseñas)
 
+
+//-- voy a crear un array con los nombres de los productos
+let products_json = []
+
+for (i=0; i<productos.length; i++){
+  nombre_prod = Object.keys(productos[i])[0]
+  productto = productos[i]
+  lista_prod = productto[nombre_prod]
+   products_json.push(lista_prod)
+   console.log(products_json)
+}
+
   //-- Defino tipos de mime
   const type_mime = {
     "html" : "text/html",
@@ -53,6 +65,7 @@ console.log(contraseñas)
     "png" : "image/png",
     "gif" : "image/gif",
     "ico" : "image/ico",
+    "js"   : "application/javascript"
   }; 
 
 
@@ -99,7 +112,23 @@ const server = http.createServer(function(req, res) {
     }else{
       content += "/login-res-error.html" 
     }
-  } else { 
+  } else if(url.pathname == '/productos'){
+    console.log("Buscar productos")
+    content_type = type_mime["json"];
+
+       //-- Leer los parámetros
+       let param1 = url.searchParams.get('param1');
+
+       //-- Convertimos los caracteres alphanumericos en string
+       param1 = param1.toUpperCase();
+   
+       console.log("  Param: " +  param1);
+
+       let result = []
+
+      // for (let prodc of )
+
+  }else { 
     content = url.pathname;
   }
  

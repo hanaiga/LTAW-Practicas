@@ -1,9 +1,11 @@
 console.log("Ejecutando Javascript...");
 
 //-- Elementos HTML para mostrar informacion
+//-- Posibles productos
 const display1 = document.getElementById("display1");
 
 //-- Caja de busqueda
+//-- Aqui es donde introducios la busquedas
 const caja = document.getElementById("caja");
 
 //-- Retrollamda del boton de Ver productos
@@ -24,7 +26,6 @@ caja.oninput = () => {
 
                 //-- La respuesta es un objeto JSON
                 let productos = JSON.parse(m.responseText)
-
                 console.log(productos);
 
                 //-- Borrar el resultado anterior
@@ -32,13 +33,13 @@ caja.oninput = () => {
 
                 //--Recorrer los productos del objeto JSON
                 for (let i=0; i < productos.length; i++) {
-
-                    //-- Añadir cada producto al párrafo de visualización
+                 
+                    //-- Escribir en el display
                     display1.innerHTML += productos[i];
-
+                                            
                     //-- Separamos los productos por ',''
                     if (i < productos.length-1) {
-                    display1.innerHTML += ', ';
+                    display1.innerHTML += ',';
                     }
                 }
 
@@ -53,8 +54,9 @@ caja.oninput = () => {
 
     console.log(caja.value.length);
 
-    //-- La peticion se realia solo si hay al menos 1 carácter
-    if (caja.value.length >= 1) {
+    //-- Peticion AJAX de busqueda
+    //-- La peticion se realia solo si hay al menos 3 carácter
+    if (caja.value.length >=3) {
 
       //-- Configurar la petición
       m.open("GET","/productos?param1=" + caja.value, true);
