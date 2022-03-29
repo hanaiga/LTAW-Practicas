@@ -68,7 +68,8 @@ for (i=0; i<productos.length; i++){
     "js"   : "application/javascript"
   }; 
 
-
+  // array donde guardamos los nombres buscados
+  let result_busqueda = []
 //-- Creamos el servidor
 const server = http.createServer(function(req, res) {
     
@@ -113,7 +114,7 @@ const server = http.createServer(function(req, res) {
       content += "/login-res-error.html" 
     }
   } else if(url.pathname == '/productos'){
-    console.log("Buscar productos")
+   
     content_type = type_mime["json"];
 
        //-- Leer los parámetros
@@ -122,23 +123,28 @@ const server = http.createServer(function(req, res) {
        //-- Convertimos los caracteres alphanumericos en string
        param1 = param1.toUpperCase();
    
-       console.log("  Param: " +  param1);
+       console.log("Param: " +  param1);
 
-       let result = []
+
 
        for (let prodc of products_json){
          prodU = prodc.toUpperCase()
 
          if(prodU.startsWith(param1)){
-           result.push(prodc)
+           result_busqueda.push(prodc)
          }
        }
-       console.log(result)
-       busqueda = result;
-       content = JSON.stringify(result);
-  }else if(url.pathname == '/buscar'){
-    content = "/tienda.html"
+       console.log(result_busqueda)
+       busqueda = result_busqueda;
+       content = JSON.stringify(result_busqueda);
+       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+       console.log(content)
 
+  }else if(url.pathname == '/buscar'){
+
+    //for (let coso of result_busqueda)
+    content = "/tienda.html"
+    
   }else { 
     content = url.pathname;
   }

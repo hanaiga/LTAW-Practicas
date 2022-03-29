@@ -20,7 +20,7 @@ caja.oninput = () => {
 
         //-- Petición enviada y recibida. Todo OK!
         if (m.readyState==4) {
-
+                console.log("###############################################")
             //-- Solo la procesamos si la respuesta es correcta
             if (m.status==200) {
 
@@ -37,10 +37,7 @@ caja.oninput = () => {
                     //-- Escribir en el display
                     display1.innerHTML += productos[i];
                                             
-                    //-- Separamos los productos por ',''
-                    if (i < productos.length-1) {
-                    display1.innerHTML += ',';
-                    }
+                    
                 }
 
             } else {
