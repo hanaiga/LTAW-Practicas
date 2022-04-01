@@ -1,17 +1,15 @@
 console.log("Ejecutando Javascript...");
 
-//-- Elementos HTML para mostrar informacion
-//-- Posibles productos
+//-- Obtenemos el display donde vamos a mostrar las busquedas realizadas.
 const display1 = document.getElementById("display1");
 
-//-- Caja de busqueda
-//-- Aqui es donde introducios la busquedas
+//-- La caja de las busquedas
 const caja = document.getElementById("caja");
 
-//-- Retrollamda del boton de Ver productos
+//-- Funcion de retrollamada
 caja.oninput = () => {
 
-    //-- Crear objeto para hacer peticiones AJAX
+    //-- Creamos objeto para hacer peticiones AJAX
     const m = new XMLHttpRequest();
 
     //-- Función de callback que se invoca cuando
@@ -44,7 +42,7 @@ caja.oninput = () => {
                 //-- Hay un error en la petición
                 //-- Lo notificamos en la consola y en la propia web
                 console.log("Error en la petición: " + m.status + " " + m.statusText);
-                display2.innerHTML += '<p>ERROR</p>'
+               // display2.innerHTML += '<p>ERROR</p>'
             }
         }
     }

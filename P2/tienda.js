@@ -65,7 +65,8 @@ for (i=0; i<productos.length; i++){
     "png" : "image/png",
     "gif" : "image/gif",
     "ico" : "image/ico",
-    "js"   : "application/javascript"
+    "js"   : "application/javascript",
+    "json" : "application/json",
   }; 
 
   // array donde guardamos los nombres buscados
@@ -116,6 +117,7 @@ const server = http.createServer(function(req, res) {
   } else if(url.pathname == '/productos'){
    
     content_type = type_mime["json"];
+    console.log(content_type)
 
        //-- Leer los parámetros
        let param1 = url.searchParams.get('param1');
@@ -124,8 +126,6 @@ const server = http.createServer(function(req, res) {
        param1 = param1.toUpperCase();
    
        console.log("Param: " +  param1);
-
-
 
        for (let prodc of products_json){
          prodU = prodc.toUpperCase()
@@ -137,13 +137,31 @@ const server = http.createServer(function(req, res) {
        console.log(result_busqueda)
        busqueda = result_busqueda;
        content = JSON.stringify(result_busqueda);
-       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    
        console.log(content)
 
   }else if(url.pathname == '/buscar'){
 
+      let produs = [
+        'LANCOME',
+        'YVES SAINT LAURENT',
+        'JIMMY CHOO',
+        'TOUS',
+        'CHLOE',
+        'MARC JACOBS',
+        'PACO RABENNE',
+        'DIOR',
+        'HUGO BOSS',
+        'CAROLINA HERRERA',
+        'BEVERLY HILLS',
+        'RALPH LAUREN'
+      ]
+
+      if (produs.includes(busqueda[0])){
+        console.log("LO HAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
+      }
     //for (let coso of result_busqueda)
-    content = "/tienda.html"
+   // content = "/tienda.html"
     
   }else { 
     content = url.pathname;
