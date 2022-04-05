@@ -66,7 +66,7 @@ for (i=0; i<productos.length; i++){
     "gif" : "image/gif",
     "ico" : "image/ico",
     "js"   : "application/javascript",
-    "json": "application/json"
+    "json" : "application/json",
   }; 
 
   // array donde guardamos los nombres buscados
@@ -117,6 +117,7 @@ const server = http.createServer(function(req, res) {
   } else if(url.pathname == '/productos'){
    
     content_type = type_mime["json"];
+    console.log(content_type)
 
        //-- Leer los parámetros
        let param1 = url.searchParams.get('param1');
@@ -135,16 +136,32 @@ const server = http.createServer(function(req, res) {
        }
        console.log(result_busqueda)
        busqueda = result_busqueda;
-       console.log(busqueda)
        content = JSON.stringify(result_busqueda);
-       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    
        console.log(content)
-
 
   }else if(url.pathname == '/buscar'){
 
+      let produs = [
+        'LANCOME',
+        'YVES SAINT LAURENT',
+        'JIMMY CHOO',
+        'TOUS',
+        'CHLOE',
+        'MARC JACOBS',
+        'PACO RABENNE',
+        'DIOR',
+        'HUGO BOSS',
+        'CAROLINA HERRERA',
+        'BEVERLY HILLS',
+        'RALPH LAUREN'
+      ]
+
+      if (produs.includes(busqueda[0])){
+        console.log("LO HAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
+      }
     //for (let coso of result_busqueda)
-    content = "/tienda.html"
+   // content = "/tienda.html"
     
   }else { 
     content = url.pathname;
@@ -152,24 +169,20 @@ const server = http.createServer(function(req, res) {
  
   //-- obtengo la extension del content
   extension = content.split(".")[1]; 
-
   content = "." + content 
 
   console.log("Recurso solicitado: " + content);
   console.log("Extension del content: " + extension);
 
-
   //-- Defino tipo de mime del content solicitado
   let mime = type_mime[extension];
-  
-
 
   fs.readFile(content, function(err,data) {
     //-- Si se produce error muestro pag de error
     if(err) {
 
         //-- Mandamos cabecera de error
-      res.writeHead(404, {'Content-Type': content_type});
+      res.writeHead(404, {'Content-Type': 'text/html'});
       console.log("404 Not Found");
       content = "error.html";
       data = fs.readFileSync(content);
