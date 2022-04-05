@@ -18,10 +18,10 @@ caja.oninput = () => {
 
         //-- Petición enviada y recibida. Todo OK!
         if (m.readyState==4) {
-                console.log("###############################################")
+                
             //-- Solo la procesamos si la respuesta es correcta
             if (m.status==200) {
-
+                console.log("###############################################")
                 //-- La respuesta es un objeto JSON
                 let productos = JSON.parse(m.responseText)
                 console.log(productos);
