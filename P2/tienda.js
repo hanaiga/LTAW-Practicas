@@ -65,7 +65,8 @@ for (i=0; i<productos.length; i++){
     "png" : "image/png",
     "gif" : "image/gif",
     "ico" : "image/ico",
-    "js"   : "application/javascript"
+    "js"   : "application/javascript",
+    "json": "application/json"
   }; 
 
   // array donde guardamos los nombres buscados
@@ -125,8 +126,6 @@ const server = http.createServer(function(req, res) {
    
        console.log("Param: " +  param1);
 
-
-
        for (let prodc of products_json){
          prodU = prodc.toUpperCase()
 
@@ -136,9 +135,11 @@ const server = http.createServer(function(req, res) {
        }
        console.log(result_busqueda)
        busqueda = result_busqueda;
+       console.log(busqueda)
        content = JSON.stringify(result_busqueda);
        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
        console.log(content)
+
 
   }else if(url.pathname == '/buscar'){
 
@@ -151,20 +152,24 @@ const server = http.createServer(function(req, res) {
  
   //-- obtengo la extension del content
   extension = content.split(".")[1]; 
+
   content = "." + content 
 
   console.log("Recurso solicitado: " + content);
   console.log("Extension del content: " + extension);
 
+
   //-- Defino tipo de mime del content solicitado
   let mime = type_mime[extension];
+  
+
 
   fs.readFile(content, function(err,data) {
     //-- Si se produce error muestro pag de error
     if(err) {
 
         //-- Mandamos cabecera de error
-      res.writeHead(404, {'Content-Type': 'text/html'});
+      res.writeHead(404, {'Content-Type': content_type});
       console.log("404 Not Found");
       content = "error.html";
       data = fs.readFileSync(content);
