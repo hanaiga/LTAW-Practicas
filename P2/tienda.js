@@ -149,6 +149,7 @@ const server = http.createServer(function(req, res) {
        filenammee = JSON.stringify(result_busqueda);
        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
        console.log(filenammee)
+       
        res.setHeader('Content-Type', content_type);
        res.write(filenammee);
        res.end()
