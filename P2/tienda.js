@@ -69,8 +69,7 @@ for (i=0; i<productos.length; i++){
     "json": "application/json"
   }; 
 
-  // array donde guardamos los nombres buscados
-  let result_busqueda = []
+
 //-- Creamos el servidor
 const server = http.createServer(function(req, res) {
     
@@ -122,12 +121,13 @@ const server = http.createServer(function(req, res) {
 
 
 
-  let file = ""
+  
 
   if(url.pathname == '/productos'){
    
     content_type = type_mime["json"];
-
+    // array donde guardamos los nombres buscados
+    let result_busqueda = []
        //-- Leer los parámetros
        let param1 = url.searchParams.get('param1');
 
@@ -136,6 +136,8 @@ const server = http.createServer(function(req, res) {
    
        console.log("Param: " +  param1);
 
+        let busqueda = ""
+        
        for (let prodc of products_json){
          prodU = prodc.toUpperCase()
 
@@ -145,7 +147,6 @@ const server = http.createServer(function(req, res) {
        }
        console.log(result_busqueda)
        busqueda = result_busqueda;
-       console.log(busqueda)
        filenammee = JSON.stringify(result_busqueda);
        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
        console.log(filenammee)
