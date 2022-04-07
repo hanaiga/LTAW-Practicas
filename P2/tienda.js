@@ -166,14 +166,19 @@ const server = http.createServer(function(req, res) {
       }
    
       productos_cesta.push(produx);
-
+      let cookie_cesta = ''
 
 
     for (i=0; i<productos_cesta.length; i++){
       produc_cesta = productos_cesta[i]
-      pedido += ('<h4>' + productos_cesta + '</h4>') 
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      console.log(productos_cesta)
+      pedido += ('<h4>' + produc_cesta + '</h4>') 
+      cookie_cesta += (produc_cesta + ', ') 
     }
 
+    //-- guardamos la cookie del pedido
+    res.setHeader('Set-Cookie', "cesta=" + cookie_cesta)
     content += "/compra.html"
     content = content.replace('CESTA', pedido)
 
@@ -427,7 +432,9 @@ const server = http.createServer(function(req, res) {
         data = data.replace("STOCK", stock)
       }else if(content == "./compra.html"){
         file = fs.readFileSync('compra.html', 'utf-8')
+        espacio = ('<br>')
         data = file.replace('CESTA', pedido)
+        data = data.replace('FIN', espacio)
       }
 
 
