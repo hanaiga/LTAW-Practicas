@@ -113,6 +113,8 @@ const server = http.createServer(function(req, res) {
     }else{
       content += "/login-res-error.html" 
     }
+  }else if(url.pathname == '/cestam1'){
+      content += "/compra.html"
   }else { 
     content = url.pathname;
   }
