@@ -48,6 +48,9 @@ console.log(contraseñas)
 //-- voy a crear un array con los nombres de los productos
 let products_json = []
 
+//-- array con los productos que se meten en la cesta
+let productos_cesta = []
+
 for (i=0; i<productos.length; i++){
   nombre_prod = Object.keys(productos[i])[0]
   productto = productos[i]
@@ -95,6 +98,8 @@ const server = http.createServer(function(req, res) {
     //-- Aqui almaceno el content solicitado
   let content = "";
 
+  let pedido = ''
+
   //-- Analizo
   //-- si es el content raiz devuelvo la pag principal
   if(url.pathname == '/') { 
@@ -113,8 +118,65 @@ const server = http.createServer(function(req, res) {
     }else{
       content += "/login-res-error.html" 
     }
-  }else if(url.pathname == '/cestam1'){
-      content += "/compra.html"
+  }else if(url.pathname == '/cestam1' || url.pathname == '/cestam2' ||url.pathname == '/cestam3' ||
+    url.pathname == '/cestam4' || url.pathname == '/cestam5' ||url.pathname == '/cestam6' ||
+    url.pathname == '/cestah1' ||url.pathname == '/cestah2' ||url.pathname == '/cestah3' ||
+    url.pathname == '/cestah4' ||url.pathname == '/cestah5' ||url.pathname == '/cestah6' ){
+    
+      switch(url.pathname){
+        case '/cestam1':
+          produx = 'LANCOME'
+          break
+        case '/cestam2':
+          produx = 'YVES SAINT LAURENT'
+          break
+        case '/cestam3':
+          produx = 'JIMMY CHOO'
+          break
+        case '/cestam4':
+          produx = 'TOUS'
+          break
+        case '/cestam5':
+          produx = 'CHLOE'
+          break
+        case '/cestam6':
+          produx = 'MARC JACOBS'
+          break
+        case '/cestah1':
+          produx = 'PACO RABENNE'
+          break
+        case '/cestah2':
+          produx = 'DIOR'
+          break
+        case '/cestah3':
+          produx =  'HUGO BOSS'
+          break
+        case '/cestah4':
+          produx = 'CAROLINA HERRERA'
+          break
+        case '/cestah5':
+          produx = 'BEVERLY HILLS'
+          break
+        case '/cestah6':
+          produx = 'RALPH LAUREN'
+          break
+        default:
+          content += "error.html"
+          break
+      }
+   
+      productos_cesta.push(produx);
+
+
+
+    for (i=0; i<productos_cesta.length; i++){
+      produc_cesta = productos_cesta[i]
+      pedido += ('<h4>' + productos_cesta + '</h4>') 
+    }
+
+    content += "/compra.html"
+    content = content.replace('CESTA', pedido)
+
   }else { 
     content = url.pathname;
   }
@@ -363,6 +425,9 @@ const server = http.createServer(function(req, res) {
         data = file.replace("DESCRIPCION", description)
         data = data.replace("PRECIO", precio)
         data = data.replace("STOCK", stock)
+      }else if(content == "./compra.html"){
+        file = fs.readFileSync('compra.html', 'utf-8')
+        data = file.replace('CESTA', pedido)
       }
 
 
