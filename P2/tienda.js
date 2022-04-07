@@ -117,11 +117,9 @@ const server = http.createServer(function(req, res) {
     content = url.pathname;
   }
 
-
-
-
-
-  
+  const fichero = "result-Json.json";
+  const buscado = fs.readFileSync(fichero);
+  const resultBusq = JSON.parse(buscado); 
 
   if(url.pathname == '/productos'){
    
@@ -145,40 +143,45 @@ const server = http.createServer(function(req, res) {
            result_busqueda.push(prodc)
          }
        }
-       console.log(result_busqueda)
        busqueda = result_busqueda;
        filenammee = JSON.stringify(result_busqueda);
-       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-       console.log(filenammee)
-       
+       fs.writeFileSync('result-json.json', filenammee);
        res.setHeader('Content-Type', content_type);
        res.write(filenammee);
        res.end()
        return;
 
-  }else if(url.pathname == './cliente.js'){
-    //-- Leer fichero javascript
-   // console.log("recurso: " + file);
-    fs.readFile(filenammee, 'utf-8', (err,data) => {
-        if (err) {
-            console.log("Error: " + err)
-            return;
-        } else {
-          console.log()
-          res.setHeader('Content-Type', 'application/javascript');
-          res.write(data);
-          res.end();
-        }
-    });
-    
-    return;
   }else if(url.pathname == '/buscar'){
 
-    //for (let coso of result_busqueda)
-    content = "/tienda.html"
+    if (resultBusq == "LANCOME"){
+      content = "/m1.html"
+    }else if (resultBusq == "YVES SAINT LAURENT"){
+      content = "/m2.html"
+    }else if (resultBusq == "JIMMY CHOO"){
+      content = "/m3.html"
+    }else if (resultBusq == "TOUS"){
+      content = "/m4.html"
+    }else if (resultBusq == "CHLOE"){
+      content = "/m5.html"
+    }else if (resultBusq == "MARC JACOBS"){
+      content = "/m6.html"
+    }else if (resultBusq == "PACO RABENNE"){
+      content = "/h1.html"
+    }else if (resultBusq == "DIOR"){
+      content = "/h2.html"
+    }else if (resultBusq == "HUGO BOSS"){
+      content = "/h3.html"
+    }else if (resultBusq == "CAROLINA HERRERA"){
+      content = "/h4.html"
+    }else if (resultBusq == "BEVERLY HILLS"){
+      content = "/h5.html"
+    }else if (resultBusq == "RALPH LAUREN"){
+      content = "/h6.html"
+    }else{
+      content = "/tienda.html"
+    }
     
   }
-
 
   //-- obtengo la extension del content
   extension = content.split(".")[1]; 
