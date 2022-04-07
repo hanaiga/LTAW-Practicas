@@ -173,7 +173,7 @@ const server = http.createServer(function(req, res) {
       produc_cesta = productos_cesta[i]
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
       console.log(productos_cesta)
-      pedido += ('<h4>' + produc_cesta + '</h4>') 
+      pedido += (produc_cesta + '<br>' + '<br>') 
       cookie_cesta += (produc_cesta + ', ') 
     }
 
@@ -434,7 +434,7 @@ const server = http.createServer(function(req, res) {
         file = fs.readFileSync('compra.html', 'utf-8')
         espacio = ('<br>')
         data = file.replace('CESTA', pedido)
-        data = data.replace('FIN', espacio)
+        
       }
 
 
