@@ -121,7 +121,7 @@ const server = http.createServer(function(req, res) {
   }else if(url.pathname == '/cestam1' || url.pathname == '/cestam2' ||url.pathname == '/cestam3' ||
     url.pathname == '/cestam4' || url.pathname == '/cestam5' ||url.pathname == '/cestam6' ||
     url.pathname == '/cestah1' ||url.pathname == '/cestah2' ||url.pathname == '/cestah3' ||
-    url.pathname == '/cestah4' ||url.pathname == '/cestah5' ||url.pathname == '/cestah6' ){
+    url.pathname == '/cestah4' ||url.pathname == '/cestah5' ||url.pathname == '/cestah6' ||url.pathname == '/cesta' ){
     
       switch(url.pathname){
         case '/cestam1':
@@ -160,19 +160,23 @@ const server = http.createServer(function(req, res) {
         case '/cestah6':
           produx = 'RALPH LAUREN'
           break
+        case '/cesta':
+          produx = ''
+          break
         default:
           content += "error.html"
           break
       }
    
-      productos_cesta.push(produx);
+      if (produx != ''){
+        productos_cesta.push(produx);
+      }
+  
       let cookie_cesta = ''
 
 
     for (i=0; i<productos_cesta.length; i++){
       produc_cesta = productos_cesta[i]
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-      console.log(productos_cesta)
       pedido += (produc_cesta + '<br>' + '<br>') 
       cookie_cesta += (produc_cesta + ', ') 
     }
