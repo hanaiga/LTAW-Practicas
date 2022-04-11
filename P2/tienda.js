@@ -79,6 +79,40 @@ const server = http.createServer(function(req, res) {
   //-- Hemos recibido una solicitud
   console.log("Petición recibida!");
 
+  let pedido = ''
+  let cantidad = ''
+  let nombre_user
+  let cookie_pedido
+
+  //-- leemos las cookies que hay
+  const cookie = req.headers.cookie
+
+  
+  
+  if (cookie){
+    //-- las cookies que tenemos 
+    console.log(cookie)
+
+    //-- obtengo cada cookie 
+    let cookies = cookie.split(";")
+
+    //-- Recorro las cookies obtenidas
+    cookies.forEach((element) => {
+      let[elemento, valor] = element.split('=')
+
+      //-- miro so el nombre esta registrado
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
+      if(elemento.trim() === 'user'){
+        nombre_user = valor
+        console.log(nombre_user)
+      }else if (elemento.trim() === 'cesta'){
+        cookie_pedido = valor
+      }
+    })
+  }else{
+      console.log("No hay cookies")
+  }
+
   //-- Obtenemos la URL del content
   let url = new URL(req.url, 'http://' + req.headers['host']);
   console.log("La URL del content solicitado es: " + url.href)
@@ -89,7 +123,7 @@ const server = http.createServer(function(req, res) {
   console.log("  Parametros: " + url.searchParams); //-- aqui puedo ver el nombre del usuario
 
   //-- Obtengo los parametros rellenados en el formulario
-  let nombre = url.searchParams.get('nombre')
+  nombre = url.searchParams.get('nombre')
   console.log("El nombre de usuario es: " + nombre)
   let contra = url.searchParams.get('password')
   console.log("La contraseña es: " + contra)
@@ -98,12 +132,14 @@ const server = http.createServer(function(req, res) {
     //-- Aqui almaceno el content solicitado
   let content = "";
 
-  let pedido = ''
+
 
   //-- Analizo
   //-- si es el content raiz devuelvo la pag principal
   if(url.pathname == '/') { 
+
     content += "/tienda.html"
+
   } else if (url.pathname == '/procesar') {
     if (nombres.includes(nombre) && contraseñas.includes(contra)) {
       console.log("usuario: " + nombre)
@@ -111,9 +147,11 @@ const server = http.createServer(function(req, res) {
       // aqui tengo que dar la cooke linea 248
 
       console.log("usuario registrado, todo ok")
-      
       content = "/login-res.html"
       html_user = nombre
+
+      //-- guardamos la cookie del registro
+      res.setHeader('Set-Cookie', "user=" + nombre)
       
     }else{
       content += "/login-res-error.html" 
@@ -171,6 +209,8 @@ const server = http.createServer(function(req, res) {
       if (produx != ''){
         productos_cesta.push(produx);
       }
+
+      cantidad = productos_cesta.length
   
       let cookie_cesta = ''
 
@@ -184,6 +224,7 @@ const server = http.createServer(function(req, res) {
     //-- guardamos la cookie del pedido
     res.setHeader('Set-Cookie', "cesta=" + cookie_cesta)
     content += "/compra.html"
+    content = content.replace('CERO', cantidad)
     content = content.replace('CESTA', pedido)
 
   }else { 
@@ -292,8 +333,15 @@ const server = http.createServer(function(req, res) {
 
       //-- login
       if (content == "./tienda.html"){
-        file = fs.readFileSync('tienda.html', 'utf-8')
-        //data = file.replace("<h3></h3>", '<h3> Usuario: ' + html_user + '</h3>')
+      file = fs.readFileSync('tienda.html', 'utf-8')
+        
+       
+      //-- compruebo si hay cookie muestro el usuario sino no
+      if(nombre_user){
+        data = file.replace("<h3></h3>", '<h3> Usuario: ' + nombre_user + '</h3>')
+      }else{
+        data = file
+      }
 
       }else if (content  == "./login-res.html"){
         file = fs.readFileSync('login-res.html', 'utf-8')
@@ -436,9 +484,19 @@ const server = http.createServer(function(req, res) {
         data = data.replace("STOCK", stock)
       }else if(content == "./compra.html"){
         file = fs.readFileSync('compra.html', 'utf-8')
+
+              //-- compruebo si hay cookie muestro el usuario sino no
+      if(cookie_pedido){
         espacio = ('<br>')
-        data = file.replace('CESTA', pedido)
+        data = file.replace('CERO', cantidad)
+        data = data.replace('CESTA', pedido)
+      }else{
+        espacio = ('<br>')
+        data = file.replace('CERO', cantidad)
+        data = data.replace('CESTA', pedido)
         
+      } 
+       
       }
 
 
