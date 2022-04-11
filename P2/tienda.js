@@ -13,6 +13,7 @@ const MAIN = fs.readFileSync('tienda.html', 'utf-8')
 //-- pag de error general
 const MAINERROR = fs.readFileSync('error.html', 'utf-8')
 
+const base = "tienda.json"
 //-- LA base de datos -> tienda.json
 const BASE_DATOS = fs.readFileSync("tienda.json")
 
@@ -29,6 +30,9 @@ const ERROR = fs.readFileSync('login-res-error.html', 'utf-8')
 
 // los productos de la tienda
 const productos = tienda[0].productos
+
+//-- para guardar pedidos
+const fin_pedido = tienda[2]["tramitar"]
 //-- creamos arrays para almacenar nombres de usuarios y contraseñas
 let nombres = []
 let contraseñas = []
@@ -101,7 +105,6 @@ const server = http.createServer(function(req, res) {
       let[elemento, valor] = element.split('=')
 
       //-- miro so el nombre esta registrado
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
       if(elemento.trim() === 'user'){
         nombre_user = valor
         console.log(nombre_user)
@@ -127,12 +130,35 @@ const server = http.createServer(function(req, res) {
   console.log("El nombre de usuario es: " + nombre)
   let contra = url.searchParams.get('password')
   console.log("La contraseña es: " + contra)
+  let direccion = url.searchParams.get('direccion')
+  console.log("La direccion es: " + direccion)
+  let tarjeta = url.searchParams.get('tarjeta')
+  console.log("El numero de tarjeta es: " + tarjeta)
 
 // recurso es mi url.patchname y su solicitud es mi content
     //-- Aqui almaceno el content solicitado
   let content = "";
 
+  //-- añado el numero de tarjeta y direccion si no son vacio
+  if((direccion != null) && (tarjeta != null)){
 
+    let tramite = {
+      "usuario": nombre_user,
+      "productos": productos_cesta,
+      "tarjeta": tarjeta,
+      "direccion": direccion
+    }
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(tramite)
+    //-- meto los detalles del pedido en la base Json
+    fin_pedido.push(tramite)
+    //-- Convertir la variable a cadena JSON
+    let mytienda = JSON.stringify(tienda);
+
+    //-- Guardarla en el fichero destino
+    fs.writeFileSync(base, mytienda);
+  }
 
   //-- Analizo
   //-- si es el content raiz devuelvo la pag principal
@@ -227,6 +253,8 @@ const server = http.createServer(function(req, res) {
     content = content.replace('CERO', cantidad)
     content = content.replace('CESTA', pedido)
 
+  }else if(url.pathname == '/finalizar'){
+    content += "/finalizar.html"
   }else { 
     content = url.pathname;
   }
