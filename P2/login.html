@@ -8,20 +8,24 @@
     <link rel="stylesheet" href="tienda.css">
 </head>
 <body>
-
+    <div id="pag_principal">
+        <a href="tienda.html" id="enlace"><h5><img src="archivos-p2/casita.png" alt="casa">Página principal</h5></a>
+    </div>
     <div id="portada"> 
         <img src="portada_tienda.png" alt="portada" width="950">
     </div>
-
+    <h1>Inicia sesión</h1>
     <div id="formulario">
         <form action="/procesar" method="get">
-            Nombre de usuario:
-            <input type="text" name="nombre"/>
+            <div id="nomUser"> Nombre de usuario </div>
+            <br>
+            <input type="text" id="cajita" name="nombre"/>
             <p></p>
-            contraseña:
-            <input type="password" name="password"/>
+            <div id="contra"> Contraseña </div>
+            <br>
+            <input type="password" id="cajita" name="password"/>
             <p></p>
-              <input type="submit" value="Enviar"/>
+              <input type="submit" value="Enviar" id="boton"/>
         </form>
     </div>
     <footer class="Info">

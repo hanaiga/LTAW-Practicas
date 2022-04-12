@@ -14,16 +14,19 @@
     <div id="portada"> 
         <img src="portada_tienda.png" alt="portada" width="950">
     </div>
-
+    <h1>Procesar compra</h1>
     <div id="formulario">
         <form action="/finalizar" method="get">
-            Direccion de envio:
-            <input type="text" name="direccion"/>
+           
+            <div id="nomUser">  Dirección de envío </div>
+            <br>
+            <input type="text" id="cajita" name="direccion"/>
             <p></p>
-            Numero de tarjeta de credito:
-            <input type="text" name="tarjeta"/>
+            <div id="contra">Tarjeta de crédito</div>
+            <br>
+            <input type="text" id="cajita" name="tarjeta"/>
             <p></p>
-              <input type="submit" value="Enviar"/>
+              <input type="submit" value="Enviar" id="boton"/>
         </form>
     </div>
     <footer class="Info">
