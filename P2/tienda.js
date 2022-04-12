@@ -7,37 +7,24 @@ const http = require('http');
 //-- Puerto del servidor 
 const PUERTO = 9090; 
 
-//-- pag principal
-const MAIN = fs.readFileSync('tienda.html', 'utf-8')
-
-//-- pag de error general
-const MAINERROR = fs.readFileSync('error.html', 'utf-8')
 
 const base = "tienda.json"
+
 //-- LA base de datos -> tienda.json
 const BASE_DATOS = fs.readFileSync("tienda.json")
 
 //-- Obtenemos la estructura de la base de datos
- const tienda = JSON.parse(BASE_DATOS)
+const tienda = JSON.parse(BASE_DATOS)
 
-const FORMULARIO = fs.readFileSync('login.html', 'utf-8')
-
-// cuando el usuario rellena el form y esta registrado
-const RESPUESTA = fs.readFileSync('login-res.html', 'utf-8')
-
-// la devuelvo si el usuario rellena el form y no esta resgtrado
-const ERROR = fs.readFileSync('login-res-error.html', 'utf-8')
-
-// los productos de la tienda
+//-- Los productos de la tienda
 const productos = tienda[0].productos
 
 //-- para guardar pedidos
 const fin_pedido = tienda[2]["tramitar"]
+
 //-- creamos arrays para almacenar nombres de usuarios y contraseñas
 let nombres = []
 let contraseñas = []
-
-//-- inicializo la variable que va a tener el content a entregar
 
 //-- Recorro la base de datos y agrego los usuarios
 tienda[1]["usuarios"].forEach((element, index)=>{
@@ -45,37 +32,35 @@ tienda[1]["usuarios"].forEach((element, index)=>{
   nombres.push(element.usuario);
   contraseñas.push(element.password)
 });
-console.log(nombres)
-console.log(contraseñas)
 
 
-//-- voy a crear un array con los nombres de los productos
+//-- Array con los nombres de los productos
 let products_json = []
 
-//-- array con los productos que se meten en la cesta
+//--Array con los productos que se meten en la cesta
 let productos_cesta = []
 
+//-- Recorro la base y meto los nombres de los productos en el array
 for (i=0; i<productos.length; i++){
   nombre_prod = Object.keys(productos[i])[0]
   productto = productos[i]
   lista_prod = productto[nombre_prod]
-   products_json.push(lista_prod)
-   console.log(products_json)
+  products_json.push(lista_prod)
+
 }
 
-  //-- Defino tipos de mime
-  const type_mime = {
-    "html" : "text/html",
-    "css" : "text/css",
-    "jpeg" : "image/jpeg",
-    "jpg" : "image/jpg",
-    "png" : "image/png",
-    "gif" : "image/gif",
-    "ico" : "image/ico",
-    "js"   : "application/javascript",
-    "json": "application/json"
-  }; 
-
+//-- Defino tipos de mime
+const type_mime = {
+  "html" : "text/html",
+  "css" : "text/css",
+  "jpeg" : "image/jpeg",
+  "jpg" : "image/jpg",
+  "png" : "image/png",
+  "gif" : "image/gif",
+  "ico" : "image/ico",
+  "js"   : "application/javascript",
+  "json": "application/json"
+}; 
 
 //-- Creamos el servidor
 const server = http.createServer(function(req, res) {
@@ -91,8 +76,7 @@ const server = http.createServer(function(req, res) {
   //-- leemos las cookies que hay
   const cookie = req.headers.cookie
 
-  
-  
+ //-- tenemos cookies
   if (cookie){
     //-- las cookies que tenemos 
     console.log(cookie)
@@ -102,9 +86,11 @@ const server = http.createServer(function(req, res) {
 
     //-- Recorro las cookies obtenidas
     cookies.forEach((element) => {
+
+      //-- Obtengo la cookie completa con el valor
       let[elemento, valor] = element.split('=')
 
-      //-- miro so el nombre esta registrado
+      //-- Miro si la cookie es de tipo user
       if(elemento.trim() === 'user'){
         nombre_user = valor
         console.log(nombre_user)
@@ -112,8 +98,9 @@ const server = http.createServer(function(req, res) {
         cookie_pedido = valor
       }
     })
+
   }else{
-      console.log("No hay cookies")
+    console.log("No hay cookies")
   }
 
   //-- Obtenemos la URL del content
@@ -135,11 +122,10 @@ const server = http.createServer(function(req, res) {
   let tarjeta = url.searchParams.get('tarjeta')
   console.log("El numero de tarjeta es: " + tarjeta)
 
-// recurso es mi url.patchname y su solicitud es mi content
-    //-- Aqui almaceno el content solicitado
+  //-- Aqui almaceno el content solicitado
   let content = "";
 
-  //-- añado el numero de tarjeta y direccion si no son vacio
+  //-- Añado el numero de tarjeta y direccion si no son vacio
   if((direccion != null) && (tarjeta != null)){
 
     let tramite = {
@@ -149,14 +135,13 @@ const server = http.createServer(function(req, res) {
       "direccion": direccion
     }
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(tramite)
-    //-- meto los detalles del pedido en la base Json
+    //-- Agrego los detalles del pedido en la base Json
     fin_pedido.push(tramite)
-    //-- Convertir la variable a cadena JSON
+
+    //-- Convierto la variable a cadena JSON
     let mytienda = JSON.stringify(tienda);
 
-    //-- Guardarla en el fichero destino
+    //-- la guardo en el fichero destino
     fs.writeFileSync(base, mytienda);
   }
 
@@ -167,26 +152,31 @@ const server = http.createServer(function(req, res) {
     content += "/tienda.html"
 
   } else if (url.pathname == '/procesar') {
+
+    //-- Miro si el nombre esta registrado o no
     if (nombres.includes(nombre) && contraseñas.includes(contra)) {
+     
       console.log("usuario: " + nombre)
 
-      // aqui tengo que dar la cooke linea 248
-
       console.log("usuario registrado, todo ok")
+      
       content = "/login-res.html"
       html_user = nombre
 
-      //-- guardamos la cookie del registro
+      //-- Guardamos la cookie del registro
       res.setHeader('Set-Cookie', "user=" + nombre)
       
     }else{
       content += "/login-res-error.html" 
     }
+
+    //-- Añadiendo productos a la cesta
   }else if(url.pathname == '/cestam1' || url.pathname == '/cestam2' ||url.pathname == '/cestam3' ||
     url.pathname == '/cestam4' || url.pathname == '/cestam5' ||url.pathname == '/cestam6' ||
     url.pathname == '/cestah1' ||url.pathname == '/cestah2' ||url.pathname == '/cestah3' ||
     url.pathname == '/cestah4' ||url.pathname == '/cestah5' ||url.pathname == '/cestah6' ||url.pathname == '/cesta' ){
     
+      //-- Defino a que producto equivale cada path
       switch(url.pathname){
         case '/cestam1':
           produx = 'LANCOME'
@@ -232,6 +222,7 @@ const server = http.createServer(function(req, res) {
           break
       }
    
+      //-- Agrego productos al carrito
       if (produx != ''){
         productos_cesta.push(produx);
       }
@@ -240,24 +231,27 @@ const server = http.createServer(function(req, res) {
   
       let cookie_cesta = ''
 
-
+    //-- Recorro los productos de la cesta para añadirlos a la cookie
     for (i=0; i<productos_cesta.length; i++){
       produc_cesta = productos_cesta[i]
       pedido += (produc_cesta + '<br>' + '<br>') 
       cookie_cesta += (produc_cesta + ', ') 
     }
 
-    //-- guardamos la cookie del pedido
+    //-- Guardamos la cookie del pedido
     res.setHeader('Set-Cookie', "cesta=" + cookie_cesta)
     content += "/compra.html"
     content = content.replace('CERO', cantidad)
     content = content.replace('CESTA', pedido)
 
+    //-- Procesar la compra
   }else if(url.pathname == '/finalizar'){
+
+    //-- Si esta iniciado sesion se puede procesar sino no.
     if(nombre_user){
       content += "/finalizar.html"
     }else{
-      content += "/login-res.html"
+      content += "/cesta-mal.html"
     }
     
   }else { 
@@ -268,36 +262,41 @@ const server = http.createServer(function(req, res) {
   const buscado = fs.readFileSync(fichero);
   const resultBusq = JSON.parse(buscado); 
 
+  //-- Busqueda
   if(url.pathname == '/productos'){
    
     content_type = type_mime["json"];
-    // array donde guardamos los nombres buscados
+    //-- Array donde guardamos los nombres buscados
     let result_busqueda = []
-       //-- Leer los parámetros
-       let param1 = url.searchParams.get('param1');
 
-       //-- Convertimos los caracteres alphanumericos en string
-       param1 = param1.toUpperCase();
+    //-- Leo los parámetros
+    let param1 = url.searchParams.get('param1');
+
+    //-- Convertimos los caracteres en string
+    param1 = param1.toUpperCase();
    
-       console.log("Param: " +  param1);
+    console.log("Param: " +  param1);
 
-        let busqueda = ""
+    let busqueda = ""
         
-       for (let prodc of products_json){
-         prodU = prodc.toUpperCase()
+    for (let prodc of products_json){
+      prodU = prodc.toUpperCase()
+      //-- Si el producto coincide con alguna busqueda lo añado
+      if(prodU.startsWith(param1)){
+        result_busqueda.push(prodc)
+      }
+    }
 
-         if(prodU.startsWith(param1)){
-           result_busqueda.push(prodc)
-         }
-       }
-       busqueda = result_busqueda;
-       filenammee = JSON.stringify(result_busqueda);
-       fs.writeFileSync('result-json.json', filenammee);
-       res.setHeader('Content-Type', content_type);
-       res.write(filenammee);
-       res.end()
-       return;
+    busqueda = result_busqueda;
+    filenammee = JSON.stringify(result_busqueda);
+    fs.writeFileSync('result-json.json', filenammee);
 
+    res.setHeader('Content-Type', content_type);
+    res.write(filenammee);
+    res.end()
+    return;
+
+  //-- Si le damos al boton de buscar
   }else if(url.pathname == '/buscar'){
 
     if (resultBusq == "LANCOME"){
@@ -330,7 +329,7 @@ const server = http.createServer(function(req, res) {
     
   }
 
-  //-- obtengo la extension del content
+  //-- Obtengo la extension del content
   extension = content.split(".")[1]; 
 
   content = "." + content 
@@ -342,20 +341,17 @@ const server = http.createServer(function(req, res) {
   //-- Defino tipo de mime del content solicitado
   let mime = type_mime[extension];
   
-
-
   fs.readFile(content, function(err,data) {
     //-- Si se produce error muestro pag de error
     if(err) {
-
-        //-- Mandamos cabecera de error
+      //-- Mandamos cabecera de error
       res.writeHead(404, {'Content-Type': content_type});
       console.log("404 Not Found");
       content = "error.html";
       data = fs.readFileSync(content);
        
     }else { 
-        //-- Mandamos cabecera de ok
+      //-- Mandamos cabecera de ok
       res.writeHead(200, {'Content-Type': mime});
       console.log("200 OK")
 
@@ -364,17 +360,16 @@ const server = http.createServer(function(req, res) {
       let precio = ""
       let stock = ""
 
-      //-- login
+      //-- Login
       if (content == "./tienda.html"){
-      file = fs.readFileSync('tienda.html', 'utf-8')
-        
-       
-      //-- compruebo si hay cookie muestro el usuario sino no
-      if(nombre_user){
-        data = file.replace("<h3></h3>", '<h3> Usuario: ' + nombre_user + '</h3>')
-      }else{
-        data = file
-      }
+
+        file = fs.readFileSync('tienda.html', 'utf-8')
+        //-- Compruebo si hay cookie muestro el usuario sino no
+        if(nombre_user){
+          data = file.replace("<h3></h3>", '<h3> Usuario: ' + nombre_user + '</h3>')
+        }else{
+          data = file
+        }
 
       }else if (content == "./m1.html"){  
         file = fs.readFileSync('m1.html', 'utf-8')
@@ -508,24 +503,24 @@ const server = http.createServer(function(req, res) {
         data = file.replace("DESCRIPCION", description)
         data = data.replace("PRECIO", precio)
         data = data.replace("STOCK", stock)
+
+
       }else if(content == "./compra.html"){
+
         file = fs.readFileSync('compra.html', 'utf-8')
 
-              //-- compruebo si hay cookie muestro el usuario sino no
-      if(cookie_pedido){
-        espacio = ('<br>')
-        data = file.replace('CERO', cantidad)
-        data = data.replace('CESTA', pedido)
-      }else{
-        espacio = ('<br>')
-        data = file.replace('CERO', cantidad)
-        data = data.replace('CESTA', pedido)
-        
-      } 
-       
+        //-- compruebo si hay cookie muestro lo que haya en cesta sino lo otro
+        if(cookie_pedido){
+          espacio = ('<br>')
+          data = file.replace('CERO', cantidad)
+          data = data.replace('CESTA', pedido)
+        }else{
+          espacio = ('<br>')
+          data = file.replace('CERO', cantidad)
+          data = data.replace('CESTA', pedido)
+          
+        } 
       }
-
-
     }
     
     // Enviamos el content solicitado
