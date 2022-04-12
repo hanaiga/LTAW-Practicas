@@ -523,11 +523,10 @@ const server = http.createServer(function(req, res) {
       }
     }
     
-    // Enviamos el content solicitado
+    //-- Enviamos el content solicitado
     res.write(data);
     res.end();
   });
-   
 });
   
 //-- Activo el servidor:
