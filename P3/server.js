@@ -41,33 +41,52 @@ app.use('/', express.static(__dirname +'/'));
 app.use(express.static('public'));
 
 
-
-
-
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
   
-  console.log('** NUEVA CONEXIÓN **'.yellow);
+  console.log('** NUEVA CONEXIÓN **'.green);
 
   //-- Como hay una nueva conexion, aumento el numero de usuarios
   usuarios += 1
 
   //-- Le mando mensaje de bienvenida al usuario nuevo
-  socket.send(bienvenida);
+  socket.send('<p style="color:Green">' + bienvenida + '</p>');
 
-  //-- Evento de desconexión
-  socket.on('disconnect', function(){
-    console.log('** CONEXIÓN TERMINADA **'.yellow);
-  });  
 
-  //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
-  socket.on("message", (msg)=> {
-    console.log("Mensaje Recibido!: " + msg.blue);
+  //-- Obtengo el nombre de usuario
+  socket.on("user_name", (user_name) =>{
 
-    //-- Reenviarlo a todos los clientes conectados
-    io.send(msg);
-  });
+    console.log("nuevo usuario: " + user_name)
+
+    //-- Mando mensaje de aviso a los demas 
+    io.send('<p style="color:Green">' + user_name + " se acaba de unir al chat " + '</p>')
+
+
+    //-- Evento de desconexión
+    socket.on('disconnect', function(){
+      console.log('** CONEXIÓN TERMINADA **'.red);
+
+      //-- Un usuario se acaba de desconectar, lo resto a la lista
+      usuarios -= 1
+
+      //-- Mando mensaje de aviso a los demas
+      io.send('<p style="color:Green">' + user_name + " ha abandonado el chat " + '</p>')
+
+      console.log("ha abandonado: " + user_name)
+
+    });  
+
+    //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
+    socket.on("message", (msg)=> {
+      console.log("Mensaje Recibido!: " + msg.blue);
+
+      //-- Reenviarlo a todos los clientes conectados
+      io.send(user_name + ": " + msg);
+    });
+
+  })
+
 
 });
 
