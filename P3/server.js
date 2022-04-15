@@ -60,7 +60,7 @@ io.on('connect', (socket) => {
     console.log("nuevo usuario: " + user_name)
 
     //-- Mando mensaje de aviso a los demas 
-    io.send('<p style="color:Green">' + user_name + " se acaba de unir al chat " + '</p>')
+    io.send('<p style="color:Green">' + user_name + " se acaba de unir al chat! " + '</p>')
 
 
     //-- Evento de desconexión
@@ -82,7 +82,7 @@ io.on('connect', (socket) => {
       console.log("Mensaje Recibido!: " + msg.blue);
 
       //-- Reenviarlo a todos los clientes conectados
-      io.send(user_name + ": " + msg);
+      io.send(msg);
     });
 
   })

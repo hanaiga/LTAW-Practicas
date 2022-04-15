@@ -24,7 +24,7 @@ socket.on("message", (msg)=>{
 
 msg_entry.oninput = () => {
   if(!escribir){
-    socket.send("Escribiendo...")
+    socket.send(user_name + " está escribiendo...")
     escribir = true
     msg_entry.value = "";
   }
@@ -33,8 +33,8 @@ msg_entry.oninput = () => {
 //-- Al apretar el botón se envía un mensaje al servidor
 msg_entry.onchange = () => {
   if (msg_entry.value)
-    socket.send(msg_entry.value);
-  
+    socket.send(user_name + ': ' + msg_entry.value);
+    escribir = false
   //-- Borrar el mensaje actual
   msg_entry.value = "";
 }
