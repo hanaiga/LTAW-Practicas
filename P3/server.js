@@ -4,7 +4,7 @@ const http = require('http');
 const express = require('express');
 const colors = require('colors');
 
-const PUERTO = 8080;
+const PUERTO = 9090;
 
 //-- Crear una nueva aplciacion web
 const app = express();
@@ -15,10 +15,22 @@ const server = http.Server(app);
 //-- Crear el servidor de websockets, asociado al servidor http
 const io = socket(server);
 
+//-- contador del numero de usuarios
+var usuarios
+
+//-- Establezco los tipos de respuestas que hay
+const bienvenida = 'Bienvenid@ al chat'
+
+
+
+
+
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
 app.get('/', (req, res) => {
-  res.send('Bienvenido a mi aplicación Web!!!' + '<p><a href="/index.html">Test</a></p>');
+    let url = __dirname + '/public/index.html'
+  res.sendFile(url);
+  console.log('nuevo acceso a la pagina principal')
 });
 
 //-- Esto es necesario para que el servidor le envíe al cliente la
@@ -28,11 +40,21 @@ app.use('/', express.static(__dirname +'/'));
 //-- El directorio publico contiene ficheros estáticos
 app.use(express.static('public'));
 
+
+
+
+
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
   
   console.log('** NUEVA CONEXIÓN **'.yellow);
+
+  //-- Como hay una nueva conexion, aumento el numero de usuarios
+  usuarios += 1
+
+  //-- Le mando mensaje de bienvenida al usuario nuevo
+  socket.send(bienvenida);
 
   //-- Evento de desconexión
   socket.on('disconnect', function(){
