@@ -51,7 +51,7 @@ io.on('connect', (socket) => {
   usuarios += 1
 
   //-- Le mando mensaje de bienvenida al usuario nuevo
-  socket.send('<p style="color:Green">' + bienvenida + '</p>');
+  socket.send('<h4 style="color:Green">' + bienvenida + '</h4>');
 
 
   //-- Obtengo el nombre de usuario
@@ -60,7 +60,7 @@ io.on('connect', (socket) => {
     console.log("nuevo usuario: " + user_name)
 
     //-- Mando mensaje de aviso a los demas 
-    io.send('<p style="color:Green">' + user_name + " se acaba de unir al chat! " + '</p>')
+    io.send('<h5 style="color:Green">' + user_name + " se acaba de unir al chat! " + '</h5>')
 
 
     //-- Evento de desconexión
@@ -71,7 +71,7 @@ io.on('connect', (socket) => {
       usuarios -= 1
 
       //-- Mando mensaje de aviso a los demas
-      io.send('<p style="color:Green">' + user_name + " ha abandonado el chat " + '</p>')
+      io.send('<h5 style="color:Green">' + user_name + " ha abandonado el chat " + '</h5>')
 
       console.log("ha abandonado: " + user_name)
 

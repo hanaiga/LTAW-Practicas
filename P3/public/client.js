@@ -1,6 +1,7 @@
 //-- Elementos del interfaz
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
+const sonido = new Audio('notificacion.oga')
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -19,7 +20,9 @@ socket.emit('user_name', user_name)
 
 socket.on("message", (msg)=>{
   display.innerHTML += '<p style="color:black">' + msg + '</p>';
-  // aqui tengo que poer el sonido linea 22
+  if(!msg.includes('está escribiendo...')){
+    sonido.play()
+  }
 });
 
 msg_entry.oninput = () => {
