@@ -89,21 +89,26 @@ io.on('connect', (socket) => {
                         + '<h5> /list: Número de usuarios conectados</h5>'
                         + '<h5> /hello: Recibir un saludo </h5>'
                         + '<h5> /date: Fecha Actual </h5>'
+                        + '<h5> /time: Las horas </h5>'
 
               socket.send(mensaje)
               break
             case "list":
-              mensaje = '<h3> Actualmente hay ' + usuarios + ' usuari@s conectados </h3>'
+              mensaje = '<h3> ---- Actualmente hay ' + usuarios + ' usuari@s conectados ---- </h3>'
               socket.send(mensaje)
               break
             case "hello":
-              mensaje = "<h4> ¡Hola Charlatan!</h4>"
+              mensaje = "<h4> ---- ¡Hola Charlatan! ---- </h4>"
               socket.send(mensaje)
               break
             case "date":
               let date = new Date()
-              mensaje = '<h3> La fecha actual es:' + date.getMonth() + '</h3>'
-              // mensaje = '<h3> La fecha actual es: ' + date.getDate() + '-' +  date.getMonth() + '-'+ date.getFullYear() + '</h3>'
+              mensaje = '<h3> ---- La fecha actual es: ' + date.getDate() + '-' +  date.getMonth() + '-' + date.getFullYear() + ' ---- </h3>'
+              socket.send(mensaje) 
+              break
+            case "time":
+              let time = new Date()
+              mensaje = '<h3> ---- La hora actual es: ' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds() + ' ---- </h3> '
               socket.send(mensaje) 
               break
             default:
