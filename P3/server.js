@@ -49,23 +49,18 @@ io.on('connect', (socket) => {
   //-- Como hay una nueva conexion, aumento el numero de usuarios
   usuarios += 1
 
-
-
   //-- Le mando mensaje de bienvenida al usuario nuevo
   socket.send('<h4>' + bienvenida + '</h4>');
-
 
   //-- Obtengo el nombre de usuario
   socket.on("user_name", (user_name) =>{
 
     array_usuarios.push(user_name)
 
-
     console.log("nuevo usuario: " + user_name)
 
     //-- Mando mensaje de aviso a los demas 
     io.send('<h5>' + user_name + " se acaba de unir al chat! " + '</h5>')
-
 
     //-- Evento de desconexión
     socket.on('disconnect', function(){
@@ -138,10 +133,6 @@ io.on('connect', (socket) => {
         }
 
     });
-
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(array_usuarios)
-
   })
 
 
