@@ -16,14 +16,11 @@ const server = http.Server(app);
 const io = socket(server);
 
 //-- contador del numero de usuarios
-var usuarios
+var usuarios = 0
+
 
 //-- Establezco los tipos de respuestas que hay
 const bienvenida = 'Bienvenid@ al chat'
-
-
-
-
 
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
@@ -80,9 +77,47 @@ io.on('connect', (socket) => {
     //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
     socket.on("message", (msg)=> {
       console.log("Mensaje Recibido!: " + msg.blue);
+        console.log(msg.includes("/"))
 
-      //-- Reenviarlo a todos los clientes conectados
-      io.send(msg);
+        if(msg.includes("/")){
+          console.log("Accediendo al menu de comandos")
+          let comando = msg.split("/")[1]
+          //-- Solo se envia al usuario
+          switch(comando){
+            case "help":
+              mensaje = '<h5> Introduce uno de los siguientes comandos:</h5>' 
+                        + '<h5> /list: Número de usuarios conectados</h5>'
+                        + '<h5> /hello: Recibir un saludo </h5>'
+                        + '<h5> /date: Fecha Actual </h5>'
+
+              socket.send(mensaje)
+              break
+            case "list":
+              mensaje = '<h3> Actualmente hay ' + usuarios + ' usuari@s conectados </h3>'
+              socket.send(mensaje)
+              break
+            case "hello":
+              mensaje = "<h4> ¡Hola Charlatan!</h4>"
+              socket.send(mensaje)
+              break
+            case "date":
+              let date = new Date()
+              mensaje = '<h3> La fecha actual es:' + date.getMonth() + '</h3>'
+              // mensaje = '<h3> La fecha actual es: ' + date.getDate() + '-' +  date.getMonth() + '-'+ date.getFullYear() + '</h3>'
+              socket.send(mensaje) 
+              break
+            default:
+              mensaje = 'El comando intorducido no es reconocido <br>'
+                        + 'Introduce /help para más informacion <br>'
+
+              socket.send(mensaje)
+              break
+          }
+        }else{
+          //-- Reenviarlo a todos los clientes conectados
+          io.send(msg);
+        }
+
     });
 
   })
