@@ -19,7 +19,7 @@ console.log("nombre de usuario: " + user_name)
 socket.emit('user_name', user_name)
 
 socket.on("message", (msg)=>{
-  display.innerHTML += '<p style="color:black">' + msg + '</p>';
+  display.innerHTML += '<p>' + msg + '</p>';
   if(!msg.includes('está escribiendo...')){
     sonido.play()
   }
