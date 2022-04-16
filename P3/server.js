@@ -18,6 +18,8 @@ const io = socket(server);
 //-- contador del numero de usuarios
 var usuarios = 0
 
+//-- Array de usuarios 
+var array_usuarios = []
 
 //-- Establezco los tipos de respuestas que hay
 const bienvenida = 'Bienvenid@ al chat'
@@ -47,12 +49,17 @@ io.on('connect', (socket) => {
   //-- Como hay una nueva conexion, aumento el numero de usuarios
   usuarios += 1
 
+
+
   //-- Le mando mensaje de bienvenida al usuario nuevo
   socket.send('<h4>' + bienvenida + '</h4>');
 
 
   //-- Obtengo el nombre de usuario
   socket.on("user_name", (user_name) =>{
+
+    array_usuarios.push(user_name)
+
 
     console.log("nuevo usuario: " + user_name)
 
@@ -71,6 +78,8 @@ io.on('connect', (socket) => {
       io.send('<h5>' + user_name + " ha abandonado el chat " + '</h5>')
 
       console.log("ha abandonado: " + user_name)
+      let pos = array_usuarios.indexOf(user_name);
+      array_usuarios.splice(pos, 1);
 
     });  
 
@@ -90,11 +99,16 @@ io.on('connect', (socket) => {
                         + '<h5> /hello: Recibir un saludo </h5>'
                         + '<h5> /date: Fecha Actual </h5>'
                         + '<h5> /time: Las horas </h5>'
+                        + '<h5> /users: Las usuarios conectados </h5>'
 
               socket.send(mensaje)
               break
             case "list":
               mensaje = '<h3> ---- Actualmente hay ' + usuarios + ' usuari@s conectados ---- </h3>'
+              socket.send(mensaje)
+              break
+            case "users":
+              mensaje = '<h3> ---- Los usuarios conectados son:  ' + array_usuarios + ' ---- </h3>'
               socket.send(mensaje)
               break
             case "hello":
@@ -124,6 +138,9 @@ io.on('connect', (socket) => {
         }
 
     });
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    console.log(array_usuarios)
 
   })
 
