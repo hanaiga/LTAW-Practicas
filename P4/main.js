@@ -40,6 +40,9 @@ app.use('/', express.static(__dirname +'/'));
 app.use(express.static('public'));
 
 
+//-- Crear la ventana de la interfaz grafica
+let win = null
+
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
@@ -48,6 +51,9 @@ io.on('connect', (socket) => {
 
   //-- Como hay una nueva conexion, aumento el numero de usuarios
   usuarios += 1
+
+  //-- muestro el numero de usuarios en la interfaz
+  win.webContents.send('users', usuarios)
 
   //-- Le mando mensaje de bienvenida al usuario nuevo
   socket.send('<h4>' + bienvenida + '</h4>');
@@ -62,12 +68,18 @@ io.on('connect', (socket) => {
     //-- Mando mensaje de aviso a los demas 
     io.send('<h5>' + user_name + " se acaba de unir al chat! " + '</h5>')
 
+    //-- Muestro en interfaz mensaje de nuevo usuario unido
+    win.webContents.send('msg_client', 'Un nuevo usuario se acaba de unir' )
+
     //-- Evento de desconexión
     socket.on('disconnect', function(){
       console.log('** CONEXIÓN TERMINADA **'.red);
 
       //-- Un usuario se acaba de desconectar, lo resto a la lista
       usuarios -= 1
+
+      //-- Actualizo en la interfaz
+      win.webContents.send('users', usuarios)
 
       //-- Mando mensaje de aviso a los demas
       io.send('<h5>' + user_name + " ha abandonado el chat " + '</h5>')
@@ -76,12 +88,18 @@ io.on('connect', (socket) => {
       let pos = array_usuarios.indexOf(user_name);
       array_usuarios.splice(pos, 1);
 
+      //-- Mensaje de desconexion
+      win.webContents.send('msg_client', 'Un usuario ha abandonado el chat')
+
     });  
 
     //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
     socket.on("message", (msg)=> {
       console.log("Mensaje Recibido!: " + msg.blue);
         console.log(msg.includes("/"))
+
+        //-- muestro el mensaje en la interfaz
+        win.webContents.send('msg_client', msg)
 
         if(msg.includes("/")){
           console.log("Accediendo al menu de comandos")
