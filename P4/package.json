@@ -7,6 +7,8 @@
         "start": "electron ."
     },
     "dependencies": {
-        "electron": "^18.2.4"
+        "electron": "^18.2.4",
+        "ip": "^1.1.8",
+        "process": "^0.11.10"
     }
 }

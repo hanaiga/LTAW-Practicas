@@ -2,7 +2,10 @@
 const socket = require('socket.io');
 const http = require('http');
 const express = require('express');
-const colors = require('colors');
+const electron = require('electron');
+const ip = require('ip');
+const process = require('process');
+
 
 const PUERTO = 9090;
 
@@ -160,3 +163,55 @@ io.on('connect', (socket) => {
 //-- ¡Que empiecen los juegos de los WebSockets!
 server.listen(PUERTO);
 console.log("Escuchando en puerto: " + PUERTO);
+
+//-- Creo la app de electron
+electron.app.on('ready', () => {
+    console.log("Evento Ready!");
+
+    //-- Crear la ventana principal de nuestra aplicación
+    win = new electron.BrowserWindow({
+        width: 800,  
+        height: 800,  
+
+        //-- Permito el acceso al sistema
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+      }
+
+    });
+
+    //-- Creo la interfaz grafica 
+    let fichero = "index.html"
+    win.loadFile(fichero);
+
+    //-- Obtener info para mostrar en la interfaz
+    v_node = process.versions.node;
+    v_chrome = process.versions.chrome;
+    v_electron = process.versions.electron;
+    arch = process.arch;
+    platform = process.platform;
+    direct = process.cwd();
+    dir_ip = ip.address();
+
+
+    //-- Agrupo los datos para enviar
+    let datos = [v_node, v_chrome, v_electron, arch, platform, direct,
+                dir_ip, PUERTO, fichero];
+
+    //-- Esperar a que la página se cargue  con el evento 'ready-to-show'
+    win.on('ready-to-show', () => {
+        console.log("Enviando datos...");
+        win.webContents.send('informacion', datos);
+    });
+
+});
+
+//----- Mensajes recibidos del renderizado --------
+
+//-- Esperar a recibir los mensajes de botón apretado (Test)
+electron.ipcMain.handle('test', (event, msg) => {
+    console.log("-> Mensaje: " + msg);
+    //-- Reenviarlo a todos los clientes conectados
+    io.send(msg);
+});

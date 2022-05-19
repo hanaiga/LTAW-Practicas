@@ -1,20 +1,79 @@
-h1 {
-    width: 93%;
-    padding: 20px;
-    background-color: lightgreen;
-    border-radius: 10px;
-    text-align: center;
-  }
-
-.blue {
-    color: blue;
+@font-face {
+  font-family: "comicate" ;
+  src: url(public/letra/COMICATE.TTF);
 }
 
-.red {
-  color: red;
+@font-face {
+  font-family: "4B";
+  src: url(public/letra/4B.TTF);
 }
 
-  #display {
-      border: 2px solid lightblue;
-      padding: 10px;
-  }
+@font-face {
+  font-family: "phoenix";
+  src: url(public/letra/Phoenix.ttf);
+}
+
+@font-face {
+  font-family: "emma";
+  src: url(public/letra/emmasophia.ttf);
+}
+
+body{
+  background-image: url(public/imagenes/fondo1.jpg);
+  font-family: "emma";
+  font-size: 9px;
+}
+
+h1{
+  text-align: center;
+  background-color: rgba(135, 207, 235, 0.719);
+  padding-top: 10px;
+  margin-left: 120px;
+  width: 500px;
+  height: 50px;
+  font-family: "comicate";
+  font-size: 40px;
+}
+
+h2{
+  font-family: "phoenix";
+  font-size: 30px;
+}
+
+#right{
+  float:right;
+  width: 45%;
+  padding: 15px;
+  background-color: rgba(255, 127, 80, 0.63);
+  border:solid bisque 10px;
+  height: 700px;
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+input{
+  border-radius: 10px;
+  font-family: "emma";
+  font-size: 9px;
+}
+
+input:hover{
+  border: solid rgb(255, 252, 77) 3px;
+  background-color: skyblue;
+}
+
+#left{
+  float:left;
+  width: 40%;
+  padding: 15px;
+  background-color: rgba(255, 127, 80, 0.63);
+  border:solid bisque 10px;
+  height: 700px;
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+#display{
+  font-family: "4B";
+  font-size: 15px;
+}
