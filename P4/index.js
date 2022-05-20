@@ -1,21 +1,39 @@
 const electron = require('electron');
+const ip = require('ip');
+//const process = require('process');
 
 console.log("Hola desde el proceso de la web...");
 
 //-- Obtener elementos de la interfaz
-const btn_test = document.getElementById("btn_test");
-const display = document.getElementById("display");
-const info1 = document.getElementById("info1");
-const info2 = document.getElementById("info2");
-const info3 = document.getElementById("info3");
-const print = document.getElementById("print");
+const v_node = document.getElementById("info1");
+const v_chrome = document.getElementById("info2");
+const v_electron = document.getElementById("info3");
+const archi = document.getElementById("info4");
+const plataf = document.getElementById("info5");
+const direct = document.getElementById("info6");
+const num_usuarios = document.getElementById("users");
+const dir_ip = document.getElementById("ip");
+const code = document.getElementById("qrcode");
+const boton = document.getElementById("btn_test");
+const mensajes = document.getElementById("display");
 
 //-- Acceder a la API de node para obtener la info
 //-- Sólo es posible si nos han dado permisos desde
 //-- el proceso princpal
-info1.textContent = process.arch;
-info2.textContent = process.platform;
-info3.textContent = process.cwd();
+
+
+
+v_node.textContent = process.versions.node;
+v_chrome.textContent = process.versions.chrome;
+v_electron.textContent = process.versions.electron;
+//-- Obtener arquitectura
+archi.textContent = process.arch;
+//-- Obtener plataforma
+plataf.textContent = process.platform;
+//-- obtener directorio
+direct.textContent = process.cwd();
+//-- Obtener direccion IP
+dir_ip.textContent = ip.address();
 
 
 btn_test.onclick = () => {
