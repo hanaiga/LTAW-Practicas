@@ -98,8 +98,10 @@ io.on('connect', (socket) => {
     socket.on("message", (msg)=> {
       console.log("Mensaje Recibido!: " + msg.blue);
         console.log(msg.includes("/"))
-        win.webContents.send('msg_client', msg);
 
+        win.webContents.send('msg_client', msg)
+
+        
         if(msg.includes("/")){
           console.log("Accediendo al menu de comandos")
           let comando = msg.split("/")[1]
@@ -217,4 +219,5 @@ electron.app.on('ready', () => {
 //-- renderizado. Al recibirlos se escribe una cadena en la consola
 electron.ipcMain.handle('test', (event, msg) => {
   console.log("-> Mensaje: " + msg);
+  io.send(msg)
 });

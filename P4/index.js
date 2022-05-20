@@ -38,7 +38,6 @@ direct.textContent = process.cwd();
 dir_ip.textContent = ("http://" + ip.address() + ":" + '9090' + '/index.html');
 
 btn_test.onclick = () => {
-    display.innerHTML += "TEST! ";
     console.log("Botón apretado!");
 
     //-- Enviar mensaje al proceso principal
@@ -61,3 +60,4 @@ electron.ipcRenderer.on('print', (event, message) => {
     console.log("Recibido: " + message);
     print.textContent = message;
   });
+
