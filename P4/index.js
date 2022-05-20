@@ -33,8 +33,9 @@ plataf.textContent = process.platform;
 //-- obtener directorio
 direct.textContent = process.cwd();
 //-- Obtener direccion IP
-dir_ip.textContent = ip.address();
 
+
+dir_ip.textContent = ("http://" + ip.address() + ":" + '9090');
 
 btn_test.onclick = () => {
     display.innerHTML += "TEST! ";
