@@ -98,6 +98,7 @@ io.on('connect', (socket) => {
     socket.on("message", (msg)=> {
       console.log("Mensaje Recibido!: " + msg.blue);
         console.log(msg.includes("/"))
+        win.webContents.send('msg_client', msg);
 
         if(msg.includes("/")){
           console.log("Accediendo al menu de comandos")
