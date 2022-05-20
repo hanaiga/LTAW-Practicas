@@ -54,9 +54,15 @@ io.on('connect', (socket) => {
 
   //-- Le mando mensaje de bienvenida al usuario nuevo
   socket.send('<h4>' + bienvenida + '</h4>');
+   
+ 
 
   //-- Obtengo el nombre de usuario
   socket.on("user_name", (user_name) =>{
+
+    mensaje = user_name + ' se ha unido al chat!'
+    //-- Envio mensaje de nuevo usuario añadido
+     win.webContents.send('msg_client', mensaje)
 
     array_usuarios.push(user_name)
 
@@ -77,8 +83,12 @@ io.on('connect', (socket) => {
 
       //-- Mando mensaje de aviso a los demas
       io.send('<h5>' + user_name + " ha abandonado el chat " + '</h5>')
-
-      console.log("ha abandonado: " + user_name)
+      
+      mensaje = user_name + ' ha abandonado el chat!'
+      //-- Envio mensaje de nuevo usuario añadido
+       win.webContents.send('msg_client', mensaje)
+     
+       console.log("ha abandonado: " + user_name)
       let pos = array_usuarios.indexOf(user_name);
       array_usuarios.splice(pos, 1);
 

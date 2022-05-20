@@ -34,8 +34,8 @@ plataf.textContent = process.platform;
 direct.textContent = process.cwd();
 //-- Obtener direccion IP
 
-
-dir_ip.textContent = ("http://" + ip.address() + ":" + '9090');
+//////////////////////////////// creo q tiene q ser solo puerto
+dir_ip.textContent = ("http://" + ip.address() + ":" + '9090' + '/index.html');
 
 btn_test.onclick = () => {
     display.innerHTML += "TEST! ";
@@ -51,6 +51,11 @@ electron.ipcRenderer.on('users', (event, message) => {
     num_usuarios.textContent = message;
 });
 
+//-- Mensajes de los clientes
+electron.ipcRenderer.on('msg_client', (event, message) => {
+    console.log("Recibido!!!!!!!!!!!!!!!!: " + message);
+    mensajes.innerHTML += message + "<br>";
+});
 //-- Mensaje recibido del proceso MAIN
 electron.ipcRenderer.on('print', (event, message) => {
     console.log("Recibido: " + message);
