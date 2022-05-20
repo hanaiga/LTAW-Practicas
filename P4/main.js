@@ -2,10 +2,7 @@
 const socket = require('socket.io');
 const http = require('http');
 const express = require('express');
-const electron = require('electron');
-const ip = require('ip');
-const process = require('process');
-
+const colors = require('colors');
 
 const PUERTO = 9090;
 
@@ -43,9 +40,6 @@ app.use('/', express.static(__dirname +'/'));
 app.use(express.static('public'));
 
 
-//-- Crear la ventana de la interfaz grafica
-let win = null
-
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
@@ -54,9 +48,6 @@ io.on('connect', (socket) => {
 
   //-- Como hay una nueva conexion, aumento el numero de usuarios
   usuarios += 1
-
-  //-- muestro el numero de usuarios en la interfaz
-  win.webContents.send('users', usuarios)
 
   //-- Le mando mensaje de bienvenida al usuario nuevo
   socket.send('<h4>' + bienvenida + '</h4>');
@@ -71,18 +62,12 @@ io.on('connect', (socket) => {
     //-- Mando mensaje de aviso a los demas 
     io.send('<h5>' + user_name + " se acaba de unir al chat! " + '</h5>')
 
-    //-- Muestro en interfaz mensaje de nuevo usuario unido
-    win.webContents.send('msg_client', 'Un nuevo usuario se acaba de unir' )
-
     //-- Evento de desconexión
     socket.on('disconnect', function(){
       console.log('** CONEXIÓN TERMINADA **'.red);
 
       //-- Un usuario se acaba de desconectar, lo resto a la lista
       usuarios -= 1
-
-      //-- Actualizo en la interfaz
-      win.webContents.send('users', usuarios)
 
       //-- Mando mensaje de aviso a los demas
       io.send('<h5>' + user_name + " ha abandonado el chat " + '</h5>')
@@ -91,18 +76,12 @@ io.on('connect', (socket) => {
       let pos = array_usuarios.indexOf(user_name);
       array_usuarios.splice(pos, 1);
 
-      //-- Mensaje de desconexion
-      win.webContents.send('msg_client', 'Un usuario ha abandonado el chat')
-
     });  
 
     //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
     socket.on("message", (msg)=> {
       console.log("Mensaje Recibido!: " + msg.blue);
         console.log(msg.includes("/"))
-
-        //-- muestro el mensaje en la interfaz
-        win.webContents.send('msg_client', msg)
 
         if(msg.includes("/")){
           console.log("Accediendo al menu de comandos")
@@ -164,54 +143,61 @@ io.on('connect', (socket) => {
 server.listen(PUERTO);
 console.log("Escuchando en puerto: " + PUERTO);
 
-//-- Creo la app de electron
+
+//-- Cargar el módulo de electron
+const electron = require('electron');
+
+console.log("Arrancando electron...");
+
+//-- Variable para acceder a la ventana principal
+//-- Se pone aquí para que sea global al módulo principal
+let win = null;
+
+//-- Punto de entrada. En cuanto electron está listo,
+//-- ejecuta esta función
 electron.app.on('ready', () => {
     console.log("Evento Ready!");
 
     //-- Crear la ventana principal de nuestra aplicación
     win = new electron.BrowserWindow({
-        width: 800,  
-        height: 800,  
+        width: 600,   //-- Anchura 
+        height: 600,  //-- Altura
 
-        //-- Permito el acceso al sistema
+        //-- Permitir que la ventana tenga ACCESO AL SISTEMA
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
-      }
-
+          nodeIntegration: true,
+          contextIsolation: false
+        }
     });
 
-    //-- Creo la interfaz grafica 
-    let fichero = "index.html"
-    win.loadFile(fichero);
+  //-- En la parte superior se nos ha creado el menu
+  //-- por defecto
+  //-- Si lo queremos quitar, hay que añadir esta línea
+  //win.setMenuBarVisibility(false)
 
-    //-- Obtener info para mostrar en la interfaz
-    v_node = process.versions.node;
-    v_chrome = process.versions.chrome;
-    v_electron = process.versions.electron;
-    arch = process.arch;
-    platform = process.platform;
-    direct = process.cwd();
-    dir_ip = ip.address();
+  //-- Cargar contenido web en la ventana
+  //-- La ventana es en realidad.... ¡un navegador!
+  //win.loadURL('https://www.urjc.es/etsit');
 
+  //-- Cargar interfaz gráfica en HTML
+  win.loadFile("index.html");
 
-    //-- Agrupo los datos para enviar
-    let datos = [v_node, v_chrome, v_electron, arch, platform, direct,
-                dir_ip, PUERTO, fichero];
+  //-- Esperar a que la página se cargue y se muestre
+  //-- y luego enviar el mensaje al proceso de renderizado para que 
+  //-- lo saque por la interfaz gráfica
+  win.on('ready-to-show', () => {
+    win.webContents.send('print', "MENSAJE ENVIADO DESDE PROCESO MAIN");
+  });
 
-    //-- Esperar a que la página se cargue  con el evento 'ready-to-show'
-    win.on('ready-to-show', () => {
-        console.log("Enviando datos...");
-        win.webContents.send('informacion', datos);
-    });
+  //-- Enviar un mensaje al proceso de renderizado para que lo saque
+  //-- por la interfaz gráfica
+  win.webContents.send('print', "MENSAJE ENVIADO DESDE PROCESO MAIN");
 
 });
 
-//----- Mensajes recibidos del renderizado --------
 
-//-- Esperar a recibir los mensajes de botón apretado (Test)
+//-- Esperar a recibir los mensajes de botón apretado (Test) del proceso de 
+//-- renderizado. Al recibirlos se escribe una cadena en la consola
 electron.ipcMain.handle('test', (event, msg) => {
-    console.log("-> Mensaje: " + msg);
-    //-- Reenviarlo a todos los clientes conectados
-    io.send(msg);
+  console.log("-> Mensaje: " + msg);
 });
