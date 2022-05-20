@@ -49,6 +49,9 @@ io.on('connect', (socket) => {
   //-- Como hay una nueva conexion, aumento el numero de usuarios
   usuarios += 1
 
+  //-- Mando el numero de usuarios
+  win.webContents.send('users', usuarios)
+
   //-- Le mando mensaje de bienvenida al usuario nuevo
   socket.send('<h4>' + bienvenida + '</h4>');
 
@@ -68,6 +71,9 @@ io.on('connect', (socket) => {
 
       //-- Un usuario se acaba de desconectar, lo resto a la lista
       usuarios -= 1
+
+      //-- Mando que un usuario se ha desconectado
+      win.webContents.send('users', usuarios)
 
       //-- Mando mensaje de aviso a los demas
       io.send('<h5>' + user_name + " ha abandonado el chat " + '</h5>')
