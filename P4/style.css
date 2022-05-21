@@ -1,79 +1,47 @@
-@font-face {
-  font-family: "comicate" ;
-  src: url(public/letra/COMICATE.TTF);
-}
-
-@font-face {
-  font-family: "4B";
-  src: url(public/letra/4B.TTF);
-}
 
 @font-face {
   font-family: "phoenix";
-  src: url(public/letra/Phoenix.ttf);
+  src: url(Phoenix.ttf);
 }
 
 @font-face {
-  font-family: "emma";
-  src: url(public/letra/emmasophia.ttf);
+  font-family: "letra";
+  src: url(public/letra.ttf);
 }
 
 body{
-  background-image: url(public/imagenes/fondo1.jpg);
-  font-family: "emma";
-  font-size: 9px;
+  background-image: url(public/fondo3.jpg);
+  background-size: cover;
+  text-align: center;
 }
 
 h1{
-  text-align: center;
-  background-color: rgba(135, 207, 235, 0.719);
-  padding-top: 10px;
-  margin-left: 120px;
-  width: 500px;
-  height: 50px;
-  font-family: "comicate";
-  font-size: 40px;
+  font-family: "letra";
+  font-size: 50px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 h2{
   font-family: "phoenix";
-  font-size: 30px;
-}
-
-#right{
-  float:right;
-  width: 45%;
-  padding: 15px;
-  background-color: rgba(255, 127, 80, 0.63);
-  border:solid bisque 10px;
-  height: 700px;
-  overflow: auto;
-  margin-bottom: 15px;
-}
-
-input{
-  border-radius: 10px;
-  font-family: "emma";
-  font-size: 9px;
-}
-
-input:hover{
-  border: solid rgb(255, 252, 77) 3px;
-  background-color: skyblue;
-}
-
-#left{
-  float:left;
-  width: 40%;
-  padding: 15px;
-  background-color: rgba(255, 127, 80, 0.63);
-  border:solid bisque 10px;
-  height: 700px;
-  overflow: auto;
-  margin-bottom: 15px;
+  font-size: 50px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 #display{
-  font-family: "4B";
-  font-size: 15px;
+  border: solid 5px;
+  border-color: rgba(180, 131, 190, 0.584);
+  background-color: white;
+  padding:10px;
+  font-family: "message";
+  width: 675px;
+  height: 250px;
+  overflow: auto;
+  text-align: center;
+}
+
+p{
+  font-family: sans-serif;
+  font-size: 12px;
 }

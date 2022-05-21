@@ -18,29 +18,40 @@
     <title>Charlemos</title>
 </head>
 <body>
-    <h1>INTERFAZ GRÁFICA</h1>
-    <hr>
-    <div id="left">
-        <h2>Información:</h2>
-            <ul>
-                <li>Version de Node: <span id="info1" class="blue"></span> </li>
-                <li>Version de Chrome: <span id="info2" class="blue"></span></li>
-                <li>Version Electron: <span id="info3" class="blue"></span></li>
-                <li>Arquitectura: <span id="info4" class="blue"></span> </li>
-                <li>Plataforma: <span id="info5" class="blue"></span></li>
-                <li>Diretorio: <span id="info6" class="blue"></span></li>
-            </ul>
-        <hr>
-            <h2>Usuarios conectados:</h2>
-            <p id="users"></p>
-        <hr>
-            <h2>Dirección IP</h2>
+
+    <div id="izda">
+        
+        <h1>CharLemos (Server)</h1>
+
+        <br>
+            <h2>URL del CHAT</h2>
             <p id="ip"></p>
+        <br>
+
+        <h2>Información útil:</h2>
+        <ul>
+            <li>Version de Node: <span id="info1" class="blue"></span> </li>
+            <li>Version de Chrome: <span id="info2" class="blue"></span></li>
+            <li>Version Electron: <span id="info3" class="blue"></span></li>
+            <li>Arquitectura: <span id="info4" class="blue"></span> </li>
+            <li>Plataforma: <span id="info5" class="blue"></span></li>
+            <li>Diretorio: <span id="info6" class="blue"></span></li>
+        </ul>
+
+        <br>
+        <p>Botón de prueba --> <input type="button" value="Test" id="btn_test"></p>
+
     </div>
-    <hr>
-   
-    <p><input type="button" value="Test" id="btn_test"></p>
-   <p>Mensajes:</p>
-    <p id="display"></p>
+    
+    <div id="dcha">
+        <br>
+        <h2>Número de usuarios conectados:</h2>
+        <p id="users"></p>
+        <br>
+
+        <h2>Mensajes:</h2>
+        <p id="display"></p>
+    </div>
+
 </body>
 </html>
