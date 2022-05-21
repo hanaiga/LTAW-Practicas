@@ -28,24 +28,26 @@ h2{
   font-size: 40px;
   margin-top: 10px;
   margin-bottom: 5px;
+  text-align: center;
 }
 #dcha{
   float:right;
-  width: 35%;
+  width: 37%;
   padding: 15px;
   background-color: rgba(255, 255, 255, 0.701);
   border:solid rgba(244, 181, 255, 0.879) 6px;
   height: 500px;
+  text-align: left;
   overflow: auto;
   margin-bottom: 15px;
 }
 #izda{
   float:left;
-  width: 40%;
+  width: 52%;
   padding: 15px;
-  background-color: rgba(255, 127, 80, 0.63);
-  border:solid bisque 10px;
-  height: 700px;
+  background-color: rgba(255, 255, 255, 0.701);
+  border:solid rgba(244, 181, 255, 0.879) 6px;
+  height: 600px;
   overflow: auto;
   margin-bottom: 15px;
 }
@@ -55,13 +57,18 @@ h2{
   background-color: white;
   padding:10px;
   font-family: "message";
-  width: 675px;
+  width: 400px;
   height: 250px;
   overflow: auto;
   text-align: center;
 }
 
 p{
-  font-family: sans-serif;
-  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  margin-left: 25px;
+}
+ul{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
 }
