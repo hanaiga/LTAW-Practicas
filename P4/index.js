@@ -1,7 +1,6 @@
+//-- Importo los modulos
 const electron = require('electron');
 const ip = require('ip');
-
-//const process = require('process');
 
 console.log("Hola desde el proceso de la web...");
 
@@ -14,7 +13,6 @@ const plataf = document.getElementById("info5");
 const direct = document.getElementById("info6");
 const num_usuarios = document.getElementById("users");
 const dir_ip = document.getElementById("ip");
-const code = document.getElementById("qrcode");
 const boton = document.getElementById("btn_test");
 const mensajes = document.getElementById("display");
 
@@ -22,26 +20,27 @@ const mensajes = document.getElementById("display");
 //-- Sólo es posible si nos han dado permisos desde
 //-- el proceso princpal
 
-
-
 v_node.textContent = process.versions.node;
 v_chrome.textContent = process.versions.chrome;
 v_electron.textContent = process.versions.electron;
-//-- Obtener arquitectura
-archi.textContent = process.arch;
-//-- Obtener plataforma
-plataf.textContent = process.platform;
-//-- obtener directorio
-direct.textContent = process.cwd();
-//-- Obtener direccion IP
 
-//////////////////////////////// creo q tiene q ser solo puerto
- url = ("http://" + ip.address() + ":" + '9090');
- dir_ip.textContent = url
-    
+//-- Arquitectura
+archi.textContent = process.arch;
+
+//-- Plataforma
+plataf.textContent = process.platform;
+
+//-- Directorio
+direct.textContent = process.cwd();
+
+//-- Direccion IP
+url = ("http://" + ip.address() + ":" + '9090');
+
+dir_ip.textContent = url
+
     btn_test.onclick = () => {
     console.log("Botón apretado!");
-
+    
     //-- Enviar mensaje al proceso principal
     electron.ipcRenderer.invoke('test', "MENSAJE DE PRUEBA: Boton apretado");
 }

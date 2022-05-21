@@ -153,8 +153,6 @@ io.on('connect', (socket) => {
 
     });
   })
-
-
 });
 
 //-- Lanzar el servidor HTTP
@@ -188,15 +186,6 @@ electron.app.on('ready', () => {
           contextIsolation: false
         }
     });
-
-  //-- En la parte superior se nos ha creado el menu
-  //-- por defecto
-  //-- Si lo queremos quitar, hay que añadir esta línea
-  //win.setMenuBarVisibility(false)
-
-  //-- Cargar contenido web en la ventana
-  //-- La ventana es en realidad.... ¡un navegador!
-  //win.loadURL('https://www.urjc.es/etsit');
 
   //-- Cargar interfaz gráfica en HTML
   win.loadFile("index.html");
