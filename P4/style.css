@@ -19,7 +19,7 @@ h1{
   font-family: "letra";
   font-size: 40px;
   margin-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   padding: 10px;
 }
 
@@ -56,11 +56,11 @@ h2{
   border-color: rgba(180, 131, 190, 0.584);
   background-color: white;
   padding:10px;
-  font-family: "message";
   width: 400px;
   height: 250px;
   overflow: auto;
   text-align: center;
+  font-family:'Lucida Sans';
 }
 
 p{
@@ -71,4 +71,20 @@ p{
 ul{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px;
+}
+.blue{
+  color:rgba(92, 233, 255);
+}
+#btn_test{
+  border-radius: 8px;
+  color: pink;
+  padding: 15px 25px;
+  font-size: 14px;
+  font-weight: 700;
+ 
+} 
+#users{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  margin-left: 25px;
 }
