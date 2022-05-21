@@ -1,6 +1,6 @@
 const electron = require('electron');
 const ip = require('ip');
-const qrcode = require('qrcode');
+
 //const process = require('process');
 
 console.log("Hola desde el proceso de la web...");
@@ -36,15 +36,9 @@ direct.textContent = process.cwd();
 //-- Obtener direccion IP
 
 //////////////////////////////// creo q tiene q ser solo puerto
- url = ("http://" + ip.address() + ":" + '9090' + '/index.html');
+ url = ("http://" + ip.address() + ":" + '9090');
  dir_ip.textContent = url
     
-//-- Generar el codigo qr de la url
-    qrcode.toDataURL(url , function (err, url) {
-        code.src = url;
-    });
-
-
     btn_test.onclick = () => {
     console.log("Botón apretado!");
 
